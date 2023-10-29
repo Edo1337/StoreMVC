@@ -1,0 +1,54 @@
+/* Этот .css для страниц и логина и пароля, дабы сократить код и сохранить одинаковый стиль для обоих этих страниц */
+* {
+    box-sizing: border-box
+}
+
+.container {
+    padding: 20px 30% 20px 30%;
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: 1px solid #ffa361;
+    border-radius: 30px;
+    background: white;
+}
+
+    input[type=text]:focus, input[type=password]:focus{
+        background-color: #ffbf92;
+        outline: none;
+    }
+
+hr {
+    border: none;
+    margin-bottom: 30px;
+}
+
+.btn {
+    margin: 0 auto;
+    display: block;
+    width: 15em;
+    height: 3em;
+    border-radius: 30px;
+    border: 1px solid #ff6a00;
+    color: black;
+    transition: .2s linear;
+    background: white;
+}
+
+    button:hover {
+        box-shadow: 0 0 0 1px #ffa600, 0 0 0 2px #ffb222;
+    }
+
+    button:active {
+        box-shadow: 0 0 0 2px #fdf5e6;
+        background: #ffb222;
+    }
+
+.in {
+    background-color: #f1f1f1;
+    text-align: center;
+}

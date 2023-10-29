@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Кошачий рай</title>
+    <meta name="description" content="Самый уютный магазин">
+    <meta name="author" content="Gladkov Eduard">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap">
+</head>
+<body>
+    <header>
+        <div class="logo">
+                <h1><a href="/"><img src="~/img/Cats_Heaven.png"></a></h1>
+        </div>
+    <ul class="menu" >
+        <li>
+                <h1><a href="/about">О НАС</a></h1>
+        </li>
+        <li>
+                <h1><a href="/login/sign_in">ЛОГИН</a></h1>
+        </li>
+        <li>
+                <h1><a href="/register/registration">РЕГИСТРАЦИЯ</a></h1>
+        </li>
+    </ul>
+    </header>
+    <main>
+        @RenderBody()
+    </main>
+    <footer style="margin-top: 40%"><center>Никакие права не защищены :(</center></footer>
+</body>
+</html>

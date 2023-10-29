@@ -1,0 +1,45 @@
+﻿@model Registr
+@{
+    ViewData["Title"] = "Регистрация";
+}
+<head>
+    <link rel="stylesheet" href="~/css/log&reg.css" asp-append-version="true" />
+</head>
+
+
+<form method="post" autocomplete="off" asp-controller="Register" asp-action="Registration_End">
+    <div class="container">
+        <h1>Регистрация</h1>
+        <p>Пожалуйста, заполните эту форму, чтобы создать учетную запись.</p>
+        <hr>
+
+        <label asp-for="FirstName"><b>Имя:</b></label>
+        <input type="text" placeholder="Введите имя" asp-for="FirstName" />
+        <span asp-validation-for="FirstName"></span>
+        <p/>
+        <label asp-for="LastName"><b>Фамилия:</b></label>
+        <input type="text" placeholder="Введите фамилию" asp-for="LastName" />
+        <span asp-validation-for="LastName"></span>
+
+        <label asp-for="Age"><b>Возраст:</b></label>
+        <input type="text" placeholder="Введите ваш возраст" asp-for="Age" />
+        <span asp-validation-for="Age"></span>
+
+        <label asp-for="Email"><b>Электронная почта:</b></label>
+        <input type="text" placeholder="Введите вашу электронную почту" asp-for="Email" />
+        <span asp-validation-for="Email"></span>
+
+        <label asp-for="Password"><b>Пароль:</b></label>
+        <input type="password" placeholder="Введите пароль" asp-for="Password" />
+        <span asp-validation-for="Password"></span>
+
+        <label asp-for="PasswordRepeat"><b>Подтверждение пароля:</b></label>
+        <input type="password" placeholder="Повторите пароль" asp-for="PasswordRepeat" required>
+        <hr>
+        <button class="btn" type="submit"><b>Зарегистрироваться</b></button>
+    </div>
+
+    <div class="container in">
+        <p>Уже есть аккаунт? <a href="/login/sign_in">Войти</a>.</p>
+    </div>
+</form>
