@@ -2,7 +2,7 @@
 
 namespace StoreMVC.Controllers
 {
-    public class MenuController : Controller
+    public class CatalogController : Controller
     {
         public IActionResult Index()
         {

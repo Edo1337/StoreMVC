@@ -7,12 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Views\Register\registration.css" />
+    <None Include="wwwroot\img\cute_kotik_for_register.png" />
+    <None Include="wwwroot\img\photo_2023-07-09_01-13-14.jpg" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\img\cute_kotik_for_register.png" />
-    <None Include="wwwroot\img\photo_2023-07-09_01-13-14.jpg" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.12" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.12">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.9" />
   </ItemGroup>
 
 </Project>

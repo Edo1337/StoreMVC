@@ -9,28 +9,34 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap">
 </head>
+
 <body>
     <header>
         <div class="logo">
             <h1><a href="/"><img src="~/img/Cats_Heaven.png"></a></h1>
         </div>
-        <ul class="menu">
+        <ul class="header_menu">
             <li>
-                <h1><a href="/about">О НАС</a></h1>
+                <a href="/home/about"><h1>О НАС</h1></a>
             </li>
             <li>
-                <h1><a href="/login/sign_in">ЛОГИН</a></h1>
-            </li>
-            <li>
-                <h1><a href="/register/registration">РЕГИСТРАЦИЯ</a></h1>
+                <partial name="_LoginPartial.cshtml" />
             </li>
         </ul>
     </header>
+
     <main>
         @RenderBody()
     </main>
-    <footer style="padding-top: 0">
+
+    <footer>
         <center>Никакие права не защищены :(</center>
     </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>

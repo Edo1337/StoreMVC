@@ -1,0 +1,51 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Вход в аккаунт";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/log&reg.css" asp-append-version="true" />
+</head>
+
+<section>
+    <form id="account" method="post" autocomplete="off">
+
+        <div class="container">
+            <h1>@ViewData["Title"]</h1>
+            <p>Пожалуйста, введите данные, чтобы войти в аккаунт.</p>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+            <label asp-for="Input.Email"><b>Введите почту:</b></label>
+            <input type="text" asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="Name@example.com" />
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+
+            <label asp-for="Input.Password"><b>Введите пароль:</b></label>
+            <input type="password" asp-for="Input.Password" autocomplete="current-password" aria-required="true" placeholder="Пароль" />
+            <span asp-validation-for="Input.Password"></span>
+
+            <div>
+                <label asp-for="Input.RememberMe" class="form-label">
+                    <input class="form-check-input" asp-for="Input.RememberMe" />
+                    @Html.DisplayNameFor(m => m.Input.RememberMe)
+                </label>
+            </div>
+
+            <hr />
+            <button id="login-submit" type="submit" class="btn"><b>Войти</b></button>
+        </div>
+
+        <div class="container in">
+            <p>
+                Ещё нету аккаунта? <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl"><b>Зарегистрировать</b></a>
+            </p>
+        </div>
+
+    </form>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

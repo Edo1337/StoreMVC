@@ -1,0 +1,30 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using StoreMVC.Areas.Identity.Data
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <ul class="header_menu">
+        <li>
+            <a id="manage" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><h1>АККАУНТ</h1></a>
+        </li>
+        <li>
+            <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <a id="logout" href="#" onclick="document.getElementById('logoutForm').submit(); return false;"><h1>ВЫЙТИ</h1></a>
+            </form>
+        </li>
+    </ul>
+}
+else
+{
+    <ul class="header_menu">
+        <li>
+            <a id="login" asp-area="Identity" asp-page="/Account/Login"><h1>ЛОГИН</h1></a>
+        </li>
+        <li>
+            <a id="register" asp-area="Identity" asp-page="/Account/Register"><h1>РЕГИСТРАЦИЯ</h1></a>
+        </li>
+    </ul>
+}
