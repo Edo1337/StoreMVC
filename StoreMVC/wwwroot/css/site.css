@@ -4,18 +4,19 @@
 }
 
 header {
+    margin: 0 0 60px;
     width: 100%;
     height: 60px;
     padding: 0 40px;
     box-sizing: border-box;
     font-family: 'Oswald', sans-serif;
-    background: #fdc180
+    background: #fdc180;
 }
 
 .menu {
     height: 100%;
     display: flex;
-    align-items:center;
+    align-items: center;
     justify-content: right;
     gap: 50px;
     list-style: none;

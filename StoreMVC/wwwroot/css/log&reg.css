@@ -41,11 +41,12 @@ hr {
 
     button:hover {
         box-shadow: 0 0 0 1px #ffa600, 0 0 0 2px #ffb222;
+        background: #ffebd5;
     }
 
     button:active {
         box-shadow: 0 0 0 2px #fdf5e6;
-        background: #ffb222;
+        background: #fdc180;
     }
 
 .in {
