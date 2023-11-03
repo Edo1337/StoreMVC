@@ -1,0 +1,29 @@
+﻿@{
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout != null)
+    {
+        Layout = parentLayout.ToString();
+    }
+    else
+    {
+        Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+    }
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/manage_acc.css" asp-append-version="true" />
+</head>
+
+<h1><strong>Настройки аккаунта</strong></h1>
+
+<header class="header_manage">
+    <div>
+        <partial name="_ManageNav" />
+    </div>
+</header>
+    <div class="info">
+        @RenderBody()
+    </div>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}
