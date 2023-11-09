@@ -8,7 +8,11 @@ var connectionString = builder.Configuration.GetConnectionString("StoreAuthDbCon
 
 builder.Services.AddDbContext<StoreAuthDbContext>(options => options.UseSqlServer(connectionString));
 
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<StoreAuthDbContext>();
+builder.Services
+    .AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<StoreAuthDbContext>()
+    .AddDefaultUI()
+    .AddDefaultTokenProviders();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -21,6 +25,13 @@ builder.Services.Configure<IdentityOptions>(options =>
     });
 
 var app = builder.Build();
+
+//Создали админа единожды и закомментили код
+
+using (var scope = app.Services.CreateScope())
+{
+    await DbSeeder.SeedDefaultDataAsync(scope.ServiceProvider);
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
