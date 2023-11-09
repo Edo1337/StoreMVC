@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StoreMVC.Data;
 
@@ -11,9 +12,11 @@ using StoreMVC.Data;
 namespace StoreMVC.Migrations
 {
     [DbContext(typeof(StoreAuthDbContext))]
-    partial class StoreAuthDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231109175718_added-tables")]
+    partial class addedtables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

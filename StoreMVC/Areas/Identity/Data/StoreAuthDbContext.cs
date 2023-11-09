@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using StoreMVC.Areas.Identity.Data;
+using StoreMVC.Models;
 
 namespace StoreMVC.Data;
 
@@ -11,6 +12,14 @@ public class StoreAuthDbContext : IdentityDbContext<ApplicationUser>
         : base(options)
     {
     }
+
+    DbSet<Category> Categories { get; set; }
+    DbSet<Food> Foods { get; set; }
+    DbSet<ShoppingCart> ShoppingCarts { get; set; }
+    DbSet<CartDetail> CartDetails { get; set; }
+    DbSet<Order> Orders { get; set; }
+    DbSet<OrderDetail> OrderDetails { get; set; }
+    DbSet<OrderStatus> OrderStatuses { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
