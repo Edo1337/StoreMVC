@@ -240,7 +240,7 @@ namespace StoreMVC.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("FoodId")
+                    b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
@@ -251,7 +251,7 @@ namespace StoreMVC.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FoodId");
+                    b.HasIndex("ProductId");
 
                     b.HasIndex("ShoppingCartId");
 
@@ -276,7 +276,7 @@ namespace StoreMVC.Migrations
                     b.ToTable("Category");
                 });
 
-            modelBuilder.Entity("StoreMVC.Models.Food", b =>
+            modelBuilder.Entity("StoreMVC.Models.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -287,7 +287,7 @@ namespace StoreMVC.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<string>("FoodName")
+                    b.Property<string>("ProductName")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
@@ -302,7 +302,7 @@ namespace StoreMVC.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Food");
+                    b.ToTable("Product");
                 });
 
             modelBuilder.Entity("StoreMVC.Models.Order", b =>
@@ -341,7 +341,7 @@ namespace StoreMVC.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("FoodId")
+                    b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.Property<int>("OrderId")
@@ -355,7 +355,7 @@ namespace StoreMVC.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FoodId");
+                    b.HasIndex("ProductId");
 
                     b.HasIndex("OrderId");
 
@@ -456,9 +456,9 @@ namespace StoreMVC.Migrations
 
             modelBuilder.Entity("StoreMVC.Models.CartDetail", b =>
                 {
-                    b.HasOne("StoreMVC.Models.Food", "Food")
+                    b.HasOne("StoreMVC.Models.Product", "Product")
                         .WithMany("CartDetail")
-                        .HasForeignKey("FoodId")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -468,15 +468,15 @@ namespace StoreMVC.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Food");
+                    b.Navigation("Product");
 
                     b.Navigation("ShoppingCart");
                 });
 
-            modelBuilder.Entity("StoreMVC.Models.Food", b =>
+            modelBuilder.Entity("StoreMVC.Models.Product", b =>
                 {
                     b.HasOne("StoreMVC.Models.Category", "Category")
-                        .WithMany("Foods")
+                        .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -497,9 +497,9 @@ namespace StoreMVC.Migrations
 
             modelBuilder.Entity("StoreMVC.Models.OrderDetail", b =>
                 {
-                    b.HasOne("StoreMVC.Models.Food", "Food")
+                    b.HasOne("StoreMVC.Models.Product", "Product")
                         .WithMany("OrderDetail")
-                        .HasForeignKey("FoodId")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -509,17 +509,17 @@ namespace StoreMVC.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Food");
+                    b.Navigation("Product");
 
                     b.Navigation("Order");
                 });
 
             modelBuilder.Entity("StoreMVC.Models.Category", b =>
                 {
-                    b.Navigation("Foods");
+                    b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("StoreMVC.Models.Food", b =>
+            modelBuilder.Entity("StoreMVC.Models.Product", b =>
                 {
                     b.Navigation("CartDetail");
 

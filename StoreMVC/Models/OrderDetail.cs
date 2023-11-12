@@ -10,13 +10,13 @@ namespace StoreMVC.Models
         [Required]
         public int OrderId { get; set; }
         [Required]
-        public int FoodId { get; set; }
+        public int ProductId { get; set; }
         [Required]
         public int Quantity { get; set; }
         [Required]
 
         public double UnitPrice { get; set; }
         public Order Order { get; set; }
-        public Food Food { get; set; }
+        public Product Product { get; set; }
     }
 }

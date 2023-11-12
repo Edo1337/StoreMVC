@@ -8,7 +8,7 @@ namespace StoreMVC.Controllers
         {
             return View();
         }
-        public IActionResult Food_For_Cat()
+        public IActionResult Food()
         {
             return View();
         }

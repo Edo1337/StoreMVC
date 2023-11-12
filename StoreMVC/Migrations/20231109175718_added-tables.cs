@@ -53,21 +53,21 @@ namespace StoreMVC.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Food",
+                name: "Product",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FoodName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    ProductName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
                     Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CategoryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Food", x => x.Id);
+                    table.PrimaryKey("PK_Product", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Food_Category_CategoryId",
+                        name: "FK_Product_Category_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Category",
                         principalColumn: "Id",
@@ -103,16 +103,16 @@ namespace StoreMVC.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ShoppingCartId = table.Column<int>(type: "int", nullable: false),
-                    FoodId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CartDetail", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CartDetail_Food_FoodId",
-                        column: x => x.FoodId,
-                        principalTable: "Food",
+                        name: "FK_CartDetail_Product_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Product",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -130,7 +130,7 @@ namespace StoreMVC.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OrderId = table.Column<int>(type: "int", nullable: false),
-                    FoodId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     UnitPrice = table.Column<double>(type: "float", nullable: false)
                 },
@@ -138,9 +138,9 @@ namespace StoreMVC.Migrations
                 {
                     table.PrimaryKey("PK_OrderDetail", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_OrderDetail_Food_FoodId",
-                        column: x => x.FoodId,
-                        principalTable: "Food",
+                        name: "FK_OrderDetail_Product_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Product",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -152,9 +152,9 @@ namespace StoreMVC.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CartDetail_FoodId",
+                name: "IX_CartDetail_ProductId",
                 table: "CartDetail",
-                column: "FoodId");
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CartDetail_ShoppingCartId",
@@ -162,8 +162,8 @@ namespace StoreMVC.Migrations
                 column: "ShoppingCartId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Food_CategoryId",
-                table: "Food",
+                name: "IX_Product_CategoryId",
+                table: "Product",
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
@@ -172,9 +172,9 @@ namespace StoreMVC.Migrations
                 column: "OrderStatusId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderDetail_FoodId",
+                name: "IX_OrderDetail_ProductId",
                 table: "OrderDetail",
-                column: "FoodId");
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderDetail_OrderId",
@@ -195,7 +195,7 @@ namespace StoreMVC.Migrations
                 name: "ShoppingCart");
 
             migrationBuilder.DropTable(
-                name: "Food");
+                name: "Product");
 
             migrationBuilder.DropTable(
                 name: "Order");

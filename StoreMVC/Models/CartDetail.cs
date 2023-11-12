@@ -10,11 +10,11 @@ namespace StoreMVC.Models
         [Required]
         public int ShoppingCartId { get; set; }
         [Required]
-        public int FoodId { get; set; }
+        public int ProductId { get; set; }
         [Required]
         public int Quantity { get; set; }
 
-        public Food Food { get; set; }
+        public Product Product { get; set; }
         public ShoppingCart ShoppingCart { get; set; }
     }
 }

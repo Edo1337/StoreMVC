@@ -14,7 +14,7 @@ public class StoreAuthDbContext : IdentityDbContext<ApplicationUser>
     }
 
     DbSet<Category> Categories { get; set; }
-    DbSet<Food> Foods { get; set; }
+    DbSet<Product> Products { get; set; }
     DbSet<ShoppingCart> ShoppingCarts { get; set; }
     DbSet<CartDetail> CartDetails { get; set; }
     DbSet<Order> Orders { get; set; }

@@ -3,14 +3,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StoreMVC.Models
 {
-    [Table("Food")]
-    public class Food
+    [Table("Product")]
+    public class Product
     {
         public int Id { get; set; }
 
         [Required]
         [MaxLength(100)]
-        public string? FoodName { get; set; }
+        public string? ProductName { get; set; }
         [Required]
         public double Price { get; set; }
         public string? Image { get; set; }

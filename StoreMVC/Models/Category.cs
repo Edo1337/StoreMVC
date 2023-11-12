@@ -11,6 +11,6 @@ namespace StoreMVC.Models
         [Required]
         [MaxLength(100)]
         public string CategoryName { get; set; }
-        public List<Food> Foods { get; set; }
+        public List<Product> Products { get; set; }
     }
 }
