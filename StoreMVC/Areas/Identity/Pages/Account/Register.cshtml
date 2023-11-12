@@ -8,43 +8,53 @@
     <link rel="stylesheet" href="~/css/log&reg.css" asp-append-version="true" />
 </head>
  *@
-<section>
-    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" autocomplete="off">
-        <div class="container">
-            <h1>@ViewData["Title"]</h1>
-            <p>Пожалуйста, заполните эту форму, чтобы создать учетную запись.</p>
-            <hr />
 
-            <div asp-validation-summary="ModelOnly" role="alert"></div>
+<div class="row">
+    <div class="col-md">
+        <section>
+            <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" autocomplete="off">
+                <div class="container">
+                    <h1>Регистрация</h1>
+                    <hr class="border-0" />
+                    <p>Пожалуйста, заполните эту форму, чтобы создать учетную запись.</p>
+                    <hr class="border-0" />
 
-            <label asp-for="Input.FirstName"><b>Имя:</b></label>
-            <input type="text" asp-for="Input.FirstName" aria-required="true" placeholder="Имя" />
+                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                    <div class="row justify-content-center">
+                        <label asp-for="Input.FirstName"><b>Имя:</b></label>
+                        <input type="text" asp-for="Input.FirstName" class="form-control" aria-required="true" placeholder="Имя" />
 
-            <label asp-for="Input.LastName"><b>Фамилия:</b></label>
-            <input type="text" asp-for="Input.LastName" aria-required="true" placeholder="Фамилия" />
+                        <label asp-for="Input.LastName"><b>Фамилия:</b></label>
+                        <input type="text" asp-for="Input.LastName" class="form-control" aria-required="true" placeholder="Фамилия" />
 
-            <label asp-for="Input.Email"><b>Email:</b></label>
-            <input type="text" asp-for="Input.Email" autocomplete="off" aria-required="true" placeholder="Name@example.com" />
-            <span asp-validation-for="Input.Email"></span>
+                        <label asp-for="Input.Email"><b>Email:</b></label>
+                        <input type="text" asp-for="Input.Email" class="form-control" autocomplete="off" aria-required="true" placeholder="Name@example.com" />
+                        <span asp-validation-for="Input.Email"></span>
 
-            <label asp-for="Input.Password"><b>Пароль:</b></label>
-            <input type="password" asp-for="Input.Password" autocomplete="new-password" aria-required="true" placeholder="Введите пароль" />
-            <span asp-validation-for="Input.Password"></span>
+                        <label asp-for="Input.Password"><b>Пароль:</b></label>
+                        <input type="password" asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Введите пароль" />
+                        <span asp-validation-for="Input.Password"></span>
 
-            <label asp-for="Input.ConfirmPassword"><b>Подтверждение пароля:</b></label>
-            <input type="password" asp-for="Input.ConfirmPassword" autocomplete="new-password" aria-required="true" placeholder="Повторите пароль" />
-            <span asp-validation-for="Input.ConfirmPassword"></span>
+                        <label asp-for="Input.ConfirmPassword"><b>Подтверждение пароля:</b></label>
+                        <input type="password" asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Повторите пароль" />
+                        <span asp-validation-for="Input.ConfirmPassword"></span>
+                    </div>
+                    <hr class="border-0" />
+                    <div class="d-flex justify-content-center">
+                        <button id="registerSubmit" type="submit" class="w-50 btn btn-lg btn-primary btn-block"><b>Зарегистрироваться</b></button>
+                    </div>
+                    <hr class="border-0" />
 
-            <button id="registerSubmit" type="submit" class="btn"><b>Зарегистрироваться</b></button>
-        </div>
-
-        <div class="container in">
-            <p>
-                Уже есть аккаунт? <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl"><b>Войти</b></a>
-            </p>
-        </div>
-    </form>
-</section>
+                    <div class="d-flex justify-content-center">
+                        <p>
+                            Уже есть аккаунт? <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl"><b>Войти</b></a>
+                        </p>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

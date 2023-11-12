@@ -35,6 +35,14 @@
                     <div class="d-flex justify-content-center">
                         <button id="login-submit" type="submit" class="w-50 btn btn-lg btn-primary btn-block">Войти</button>
                     </div>
+                <hr class="border-0" />
+
+                <div class="d-flex justify-content-center">
+                    <p>
+                        Ещё нету аккаунта? <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl"><b>Зарегистрироваться</b></a>
+                    </p>
+                </div>
+
             </form>
         </section>
 
