@@ -16,7 +16,7 @@
         <li class="nav-item">
             @if (User.IsInRole("Admin"))
             {
-                <a class="nav-link" href="#">АДМИНИСТРАТОРСКАЯ ПАНЕЛЬ</a>
+                <a class="nav-link" id="manage" href="#">АДМИНИСТРАТОРСКАЯ ПАНЕЛЬ</a>
             }
             else
             {
@@ -25,7 +25,7 @@
         </li>
         <li class="nav-item">
             <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button id="logout" class="btn btn-lg btn-primary nav-link btn-link text-dark" type="submit" >ВЫЙТИ</button>
+                <button id="logout" class="btn btn-lg btn-primary nav-link btn-link border-0" type="submit" >ВЫЙТИ</button>
             </form>
         </li>
     }

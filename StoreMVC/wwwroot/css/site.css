@@ -46,6 +46,11 @@ body {
     background: #fdc180;
 }
 
-button {
+.btn {
+    color: whitesmoke;
     font-family: 'Oswald', sans-serif;
+}
+
+.btn-lg{
+    color:#72573a;
 }
