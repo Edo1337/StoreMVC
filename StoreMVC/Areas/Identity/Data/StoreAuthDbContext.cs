@@ -13,8 +13,8 @@ public class StoreAuthDbContext : IdentityDbContext<ApplicationUser>
     {
     }
 
-    DbSet<Category> Categories { get; set; }
-    DbSet<Product> Products { get; set; }
+    public DbSet<Category> Categories { get; set; }
+    public DbSet<Product> Products { get; set; }
     DbSet<ShoppingCart> ShoppingCarts { get; set; }
     DbSet<CartDetail> CartDetails { get; set; }
     DbSet<Order> Orders { get; set; }

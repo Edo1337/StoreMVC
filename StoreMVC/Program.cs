@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using StoreMVC;
 using StoreMVC.Areas.Identity.Data;
 using StoreMVC.Data;
 
@@ -16,6 +17,8 @@ builder.Services
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddTransient<IHomeRepository, HomeRepository>();
 builder.Services.AddRazorPages();
 
 builder.Services.Configure<IdentityOptions>(options =>
@@ -28,10 +31,10 @@ var app = builder.Build();
 
 //Создали админа единожды и закомментили код
 
-using (var scope = app.Services.CreateScope())
-{
-    await DbSeeder.SeedDefaultDataAsync(scope.ServiceProvider);
-}
+//using (var scope = app.Services.CreateScope())
+//{
+//    await DbSeeder.SeedDefaultDataAsync(scope.ServiceProvider);
+//}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

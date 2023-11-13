@@ -12,6 +12,12 @@ namespace StoreMVC.Models
         [MaxLength(100)]
         public string? ProductName { get; set; }
         [Required]
+        [MaxLength(100)]
+        public string? ManufacturerName { get; set; }
+        [Required]
+        [MaxLength(100)]
+        public string? Description { get; set; }
+        [Required]
         public double Price { get; set; }
         public string? Image { get; set; }
         [Required]
@@ -19,5 +25,8 @@ namespace StoreMVC.Models
         public Category Category { get; set; }
         public List<OrderDetail> OrderDetail { get; set; }
         public List<CartDetail> CartDetail { get; set; }
+
+        [NotMapped]
+        public string CategoryName { get; set; }
     }
 }

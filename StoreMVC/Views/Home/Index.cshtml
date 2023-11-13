@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<Product>
+@{
     ViewData["Title"] = "Главная";
 }
 
@@ -8,7 +9,7 @@
         <div class="col-12">
             <label class="visually-hidden" for="inlineFormSelectPref">Категория</label>
             <select class="form-select" id="categoryId">
-                <option selected>Выберите</option>
+                <option selected>Выберите..</option>
                 <option value="1">Корм</option>
                 <option value="2">Игрушки</option>
                 <option value="3">Хуйнюшки</option>
@@ -19,7 +20,7 @@
             <label class="visually-hidden" for="inlineFormInputGroupUsername">Поиск по названию</label>
             <div class="input-group">
                 <div class="input-group-text"></div>
-                <input type="text" class="form-control" placeholder="Поиск по названию">
+                <input type="text" class="form-control" id="sTerm" placeholder="Поиск по названию">
             </div>
         </div>
 
@@ -59,16 +60,31 @@
 </div>
 
 <div class="w-100 mt-4 d-flex flex-wrap justify-content-center">
-    @for (int i = 0; i < 12; i++)
+    @foreach (var product in Model)
     {
         <div class="card mx-3 mb-4" style="width: 24rem;">
-
-            <img src="..." class="card-img-top" alt="...">
-
-            <div class="card-body">
-                <h5 class="card-title">Название</h5>
-                <p class="card-text">Описание товара</p>
-                <a href="#" class="btn btn-primary">Добавить в корзину</a>
+            <div class="row">
+                <div class="col-md-12 d-flex justify-content-center align-items-center" style="margin: 20px 0 0">
+                    @if (string.IsNullOrEmpty(product.Image))
+                    {
+                        <svg width="300" height="300" xmlns="http://www.w3.org/2000/svg" role="img">
+                            <rect width="100%" height="100%" rx="10" fill="#666"> </rect>
+                            <text x="40%" y="50%" fill="#444" dy=".3em">No photo</text>
+                        </svg>
+                    }
+                    else
+                    {
+                        <img src="~/img/@product.Image" class="card-img-top" alt="...">
+                    }
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">@product.ProductName</h5>
+                    <hr />
+                    <p class="card-text">Производитель: @product.ManufacturerName</p>
+                    <p class="card-text">Цена: @product.Price &#8381</p>
+                    <p class="card-text">@product.Description</p>
+                    <a href="#" class="btn btn-primary">Добавить в корзину</a>
+                </div>
             </div>
         </div>
     }

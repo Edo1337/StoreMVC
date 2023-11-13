@@ -7,15 +7,18 @@ namespace StoreMVC.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IHomeRepository _homeRepository;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IHomeRepository homeRepository)
         {
+            _homeRepository = homeRepository;
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(string sTerm = "", int categoryId = 0)
         {
-            return View();
+            IEnumerable<Product> products = await _homeRepository.GetProductsAsync(sTerm, categoryId);
+            return View(products);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
