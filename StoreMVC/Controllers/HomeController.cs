@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using StoreMVC.Models;
 using System.Diagnostics;
 
 namespace StoreMVC.Controllers
@@ -15,10 +14,19 @@ namespace StoreMVC.Controllers
             _logger = logger;
         }
 
-        public async Task<IActionResult> Index(string sTerm = "", int categoryId = 0)
+        public async Task<IActionResult> Index(string sterm = "", int categoryId = 0)
         {
-            IEnumerable<Product> products = await _homeRepository.GetProductsAsync(sTerm, categoryId);
-            return View(products);
+            IEnumerable<Product> products = await _homeRepository.GetProductsAsync(sterm, categoryId);
+            IEnumerable<Category> categories = await _homeRepository.Categories();
+            ProductDisplayModel productModel = new ProductDisplayModel
+            {
+                Products = products,
+                Categories = categories,
+                STerm = sterm,
+                CategoryId = categoryId
+            };
+
+            return View(productModel);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
