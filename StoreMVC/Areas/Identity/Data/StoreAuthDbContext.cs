@@ -15,11 +15,11 @@ public class StoreAuthDbContext : IdentityDbContext<ApplicationUser>
 
     public DbSet<Category> Categories { get; set; }
     public DbSet<Product> Products { get; set; }
-    DbSet<ShoppingCart> ShoppingCarts { get; set; }
-    DbSet<CartDetail> CartDetails { get; set; }
-    DbSet<Order> Orders { get; set; }
-    DbSet<OrderDetail> OrderDetails { get; set; }
-    DbSet<OrderStatus> OrderStatuses { get; set; }
+    public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+    public DbSet<CartDetail> CartDetails { get; set; }
+    public DbSet<Order> Orders { get; set; }
+    public DbSet<OrderDetail> OrderDetails { get; set; }
+    public DbSet<OrderStatus> OrderStatuses { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
