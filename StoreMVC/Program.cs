@@ -31,7 +31,6 @@ builder.Services.Configure<IdentityOptions>(options =>
 var app = builder.Build();
 
 //Создали админа единожды и закомментили код
-
 //using (var scope = app.Services.CreateScope())
 //{
 //    await DbSeeder.SeedDefaultDataAsync(scope.ServiceProvider);

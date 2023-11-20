@@ -11,7 +11,7 @@ namespace StoreMVC.Repositories
     public class CartRepository : ICartRepository
     {
         private readonly StoreAuthDbContext _db;
-        private readonly UserManager<ApplicationUser> _userManager;//
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         public CartRepository(StoreAuthDbContext db, IHttpContextAccessor httpContextAccessor, UserManager<ApplicationUser> userManager)
@@ -21,16 +21,14 @@ namespace StoreMVC.Repositories
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<bool> AddProductAsync(int productId, int qty)
+        public async Task<int> AddProductAsync(int productId, int qty)
         {
+            string userId = GetUserId();
             using var transaction = await _db.Database.BeginTransactionAsync();
             try
             {
-                string userId = GetUserId();
                 if (string.IsNullOrEmpty(userId))
-                {
-                    return false;
-                }
+                    throw new Exception("Пользователь не вошел в систему");
                 var cart = await GetCartAsync(userId);
                 if (cart is null)
                 {
@@ -44,9 +42,7 @@ namespace StoreMVC.Repositories
                 //cart detail section
                 var cartProduct = _db.CartDetails.FirstOrDefault(a => a.ShoppingCartId == cart.Id && a.ProductId == productId);
                 if (cartProduct is not null)
-                {
                     cartProduct.Quantity += qty;
-                }
                 else
                 {
                     cartProduct = new CartDetail
@@ -60,55 +56,49 @@ namespace StoreMVC.Repositories
                 }
                 _db.SaveChanges();
                 transaction.Commit();
-                return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return false;
+
             }
+
+            var cartProductCount = await GetCartProductCountAsync(userId);
+            return cartProductCount;
         }
 
-        public async Task<bool> RemoveProductAsync(int productId)
+        public async Task<int> RemoveProductAsync(int productId)
         {
+            string userId = GetUserId();
             try
             {
-                string userId = GetUserId();
                 if (string.IsNullOrEmpty(userId))
-                {
-                    return false;
-                }
+                    throw new Exception("Пользователь не вошел в систему");
                 var cart = await GetCartAsync(userId);
                 if (cart is null)
-                {
-                    return false;
-                }
-                _db.SaveChanges();
+                    throw new Exception("Корзина недействительна");
                 //cart detail section
-                var cartProduct = _db.CartDetails.FirstOrDefault(a => a.ShoppingCartId == cart.Id && a.ProductId == productId);
+                var cartProduct = _db.CartDetails
+                                     .FirstOrDefault(a => a.ShoppingCartId == cart.Id && a.ProductId == productId);
 
                 if (cartProduct is null)
-                {
-                    return false;
-                }
+                    throw new Exception("В корзине нет товаров");
                 else if (cartProduct.Quantity == 1)
-                {
                     _db.CartDetails.Remove(cartProduct);
-                }
                 else
-                {
                     cartProduct.Quantity = cartProduct.Quantity - 1;
-                }
 
                 _db.SaveChanges();
-                return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return false;
+
             }
+
+            var cartProductCount = await GetCartProductCountAsync(userId);
+            return cartProductCount;
         }
 
-        public async Task<IEnumerable<ShoppingCart>> GetUserCart()
+        public async Task<ShoppingCart> GetUserCart()
         {
             var userId = GetUserId();
             if (userId == null)
@@ -119,16 +109,32 @@ namespace StoreMVC.Repositories
                 .Include(a => a.CartDetails)
                 .ThenInclude(a => a.Product)
                 .ThenInclude(a => a.Category)
-                .Where(a => a.UserId == userId).ToListAsync();
+                .Where(a => a.UserId == userId).FirstOrDefaultAsync();
 
             return shoppingCart;
 
         }
 
-        private async Task<ShoppingCart> GetCartAsync(string userId)
+        public async Task<ShoppingCart> GetCartAsync(string userId)
         {
             var cart = await _db.ShoppingCarts.FirstOrDefaultAsync(x => x.UserId == userId);
             return cart;
+        }
+
+        public async Task<int> GetCartProductCountAsync(string userId = "") //общее количество элементов в карточке
+        {
+            if (!string.IsNullOrEmpty(userId))
+            {
+                userId = GetUserId();
+            }
+
+            var data = await (from cart in _db.ShoppingCarts
+                              join cartDetail in _db.CartDetails
+                              on cart.Id equals cartDetail.ShoppingCartId
+                              select new { cartDetail.Id }
+                        ).ToListAsync();
+
+            return data.Count;
         }
 
         private string GetUserId()
@@ -137,5 +143,6 @@ namespace StoreMVC.Repositories
             var userId = _userManager.GetUserId(principal);
             return userId;
         }
+
     }
 }

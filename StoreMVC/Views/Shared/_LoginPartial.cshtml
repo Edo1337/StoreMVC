@@ -5,18 +5,19 @@
 @inject UserManager<ApplicationUser> UserManager
 
 <ul class="navbar-nav text-right">
+    <li class="nav-item">
+        <a class="nav-link" href="#">
+            <span id="cartCount" class="badge text-bg-light">0</span>
+            <i class="bi bi-bag text-white"></i>
+        </a>
+    </li>
+
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item">
-            <a class="nav-link" href="#">
-                <span class="badge text-bg-light">(0)</span>
-                <i class="bi bi-bag text-white"></i>
-            </a>
-        </li>
-        <li class="nav-item">
             @if (User.IsInRole("Admin"))
             {
-                <a class="nav-link" id="manage" href="#">АДМИНИСТРАТОРСКАЯ ПАНЕЛЬ</a>
+                <a class="nav-link" id="manage" href="#">АДМИНИСТРАТОРСКАЯ ПАНЕЛЬ <span id="username">@User.Identity?.Name</span></a>
             }
             else
             {
@@ -25,7 +26,7 @@
         </li>
         <li class="nav-item">
             <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button id="logout" class="btn btn-lg btn-primary nav-link btn-link border-0" type="submit" >ВЫЙТИ</button>
+                <button id="logout" class="btn btn-lg btn-primary nav-link btn-link border-0" type="submit">ВЫЙТИ</button>
             </form>
         </li>
     }
