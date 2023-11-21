@@ -37,7 +37,14 @@ namespace StoreMVC.Controllers
         {
             int cartProduct = await _cartRepo.GetCartProductCountAsync();
 
-            return View(cartProduct);
+            return Ok(cartProduct);
+        }
+        public async Task<IActionResult> Checkout()
+        {
+            bool isCheckedOut = await _cartRepo.DoCheckout();
+            if (!isCheckedOut)
+                throw new Exception("Проблема на стороне сервера");
+            return RedirectToAction("Index", "Home");
         }
 
     }

@@ -45,12 +45,13 @@ namespace StoreMVC.Repositories
                     cartProduct.Quantity += qty;
                 else
                 {
+                    var product = _db.Products.Find(productId);
                     cartProduct = new CartDetail
                     {
                         ProductId = productId,
                         ShoppingCartId = cart.Id,
                         Quantity = qty,
-
+                        UnitPrice = product.Price
                     };
                     await _db.CartDetails.AddAsync(cartProduct);
                 }
@@ -135,6 +136,62 @@ namespace StoreMVC.Repositories
                         ).ToListAsync();
 
             return data.Count;
+        }
+
+        public async Task<bool> DoCheckout()
+        {
+            using var transaction = _db.Database.BeginTransaction();
+            try
+            {
+                // Логика
+                // передаем данные из cartDetail to order and orderDetail далее удаляем данные из cartDetail
+                var userId = GetUserId();
+                if (string.IsNullOrEmpty(userId))
+                    throw new Exception("Пользователь не вошел в систему");
+
+                var cart = await GetCartAsync(userId);
+                if (cart is null)
+                    throw new Exception("Корзина не действительная");
+
+                var cartDetail = _db.CartDetails
+                                    .Where(a => a.ShoppingCartId == cart.Id).ToList();
+
+                if (cartDetail.Count == 0)
+                    throw new Exception("Корзина пустая");
+
+                var order = new Order
+                {
+                    UserId = userId,
+                    CreateDate = DateTime.UtcNow,
+                    OrderStatusId = 1, //pending или же ожидание
+                };
+
+                _db.Orders.Add(order);
+                _db.SaveChanges();
+
+                foreach (var item in cartDetail)
+                {
+                    var orderDetail = new OrderDetail
+                    {
+                        ProductId = item.ProductId,
+                        OrderId = order.Id,
+                        Quantity = item.Quantity,
+                        UnitPrice = item.UnitPrice
+                    };
+                    _db.OrderDetails.Add(orderDetail);
+                }
+                _db.SaveChanges();
+
+                // удаление cartdetails
+                _db.CartDetails.RemoveRange(cartDetail);
+                _db.SaveChanges();
+                transaction.Commit();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         private string GetUserId()
