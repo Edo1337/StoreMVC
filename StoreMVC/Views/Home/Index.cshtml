@@ -11,7 +11,7 @@
                 <option selected>Категории</option>
                 @foreach (var category in Model.Categories)
                 {
-                    <option selected="@category.Id == Model.CategoryId" value="@category.Id">@category.CategoryName</option>
+                    <option selected="@(category.Id == Model.CategoryId)" value="@category.Id">@category.CategoryName</option>
                 }
                 <option selected>Категории</option>
             </select>
@@ -82,9 +82,11 @@
                 <div class="card-body">
                     <h5 class="card-title"><b>@product.ProductName</b></h5>
                     <hr />
-                    <p class="card-text">Производитель: @product.ManufacturerName</p>
-                    <p class="card-text">Цена: @product.Price &#8381</p>
-                    <p class="card-text">@product.Description</p>
+                    <p>
+                        <b>Производитель: </b>@product.ManufacturerName<br />
+                        <b>Цена: </b>@product.Price &#8381<br />
+                        <b>Описание: </b>@product.Description
+                    </p>
                     <button type="button" onclick="add(@product.Id)" class="btn btn-primary">Добавить в корзину</button>
                 </div>
             </div>

@@ -6,7 +6,7 @@
 
 <ul class="navbar-nav text-right">
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="/Cart/GetUserCart">
             <span id="cartCount" class="badge text-bg-light">0</span>
             <i class="bi bi-bag text-white"></i>
         </a>
@@ -17,7 +17,7 @@
         <li class="nav-item">
             @if (User.IsInRole("Admin"))
             {
-                <a class="nav-link" id="manage" href="#">АДМИНИСТРАТОРСКАЯ ПАНЕЛЬ <span id="username">@User.Identity?.Name</span></a>
+                <a class="nav-link" id="manage" href="#"> <span id="username">@User.Identity?.Name.ToUpper()</span></a>
             }
             else
             {
