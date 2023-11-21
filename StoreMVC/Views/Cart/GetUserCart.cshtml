@@ -1,0 +1,66 @@
+﻿@model ShoppingCart
+
+@{
+    ViewData["Title"] = "Корзина";
+}
+
+
+<div style="width:90%;margin:auto" class="mt-2">
+    @if (Model != null && Model.CartDetails != null && Model.CartDetails.Count > 0)
+    {
+        <h1>Корзина</h1>
+        @* <hr/> *@
+        <table class="table table-striped">
+            <tr>
+                <th>Продукт</th>
+                <th>Фото</th>
+                <th>Категория</th>
+                <th>Цена</th>
+                <th>Количество</th>
+                <th>Действие</th>
+            </tr>
+
+            @foreach (var item in Model.CartDetails)
+            {
+                <tr>
+                    <td>@item.Product.ProductName</td>
+                    <td>
+                        @if (string.IsNullOrEmpty(item.Product.Image))
+                        {
+                            <svg width="100" height="120" xmlns="http://www.w3.org/2000/svg" role="img">
+                                <rect width="100%" height="100%" rx="10" fill="#666"> </rect>
+                                <text x="40%" y="50%" fill="#444" dy=".3em">No photo</text>
+                            </svg>
+                        }
+                        else
+                        {
+                            <img style="width:100px;height:120px" src="~/img/product/@item.Product.Image" class="card-img-top">
+                        }
+                    </td>
+                    <td>@item.Product.Category.CategoryName</td>
+                    <td>@item.Product.Price X @item.Quantity</td>
+                    <td>@(item.Product.Price * item.Quantity)</td>
+                    <td>
+                        <a class="btn btn-danger" href="/Cart/AddProduct?productId=@item.ProductId&&redirect=1">+</a>
+                        <a class="btn btn-danger" href="/Cart/RemoveProduct?productId=@item.ProductId">-</a>
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+        <div class="my-2">
+            <h5>Стоимость покупки: </h5>@(Model.CartDetails.Select(item => item.Product.Price * item.Quantity).Sum())
+        </div>
+
+        <div class="my-2">
+            <a class="btn btn-primary" href="#">Checkout</a>
+        </div>
+    }
+    else
+    {
+        <h2>Корзина пустая</h2>
+    }
+
+
+</div>
