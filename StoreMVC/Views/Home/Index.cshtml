@@ -84,7 +84,7 @@
                     <hr />
                     <p>
                         <b>Производитель: </b>@product.ManufacturerName<br />
-                        <b>Цена: </b>@product.Price &#8381<br />
+                        <b>Цена: </b>@product.Price <br />
                         <b>Описание: </b>@product.Description
                     </p>
                     <button type="button" onclick="add(@product.Id)" class="btn btn-primary">Добавить в корзину</button>
@@ -99,6 +99,7 @@
         async function add(productId) {
             var usernameEl = document.getElementById("username");
             if (usernameEl == null) {
+        console.log("eweq");
                 window.location.href = "/Identity/Account/Login";
                 // var username = usernameEl.innerText;
                 // if (username.length < 1) {
@@ -109,7 +110,6 @@
                 var response = await fetch(`/Cart/AddProduct?productId=${productId}`);
                 if (response.status == 200) {
                     var result = await response.json();
-                    console.log(result);
                     var cartCountEl = document.getElementById("cartCount");
                     cartCountEl.innerHTML = result;
                     window.location.href = "#cartCount";

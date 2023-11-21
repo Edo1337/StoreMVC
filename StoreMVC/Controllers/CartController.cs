@@ -33,7 +33,7 @@ namespace StoreMVC.Controllers
             
             return View(cart);
         }
-        public async Task<IActionResult> GetCartProductCount()
+        public async Task<IActionResult> GetTotalItemInCart()
         {
             int cartProduct = await _cartRepo.GetCartProductCountAsync();
 
