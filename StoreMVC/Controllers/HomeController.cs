@@ -17,8 +17,8 @@ namespace StoreMVC.Controllers
         public async Task<IActionResult> Index(string sterm = "", int categoryId = 0)
         {
             IEnumerable<Product> products = await _homeRepository.GetProductsAsync(sterm, categoryId);
-            IEnumerable<Category> categories = await _homeRepository.Categories();
-            ProductDisplayModel productModel = new ProductDisplayModel
+            IEnumerable<Category> categories = await _homeRepository.GetCategoriesAsync();
+            var productModel = new ProductDisplayModel
             {
                 Products = products,
                 Categories = categories,

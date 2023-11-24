@@ -19,7 +19,7 @@
                 <span id="username">@User.Identity?.Name</span>
                 @if (User.IsInRole("Admin"))
                 {
-                    <span>(ADMIN)</span>
+                    <span href="/Admin/Index">(ADMIN)</span>
                 }
             </a>
             @*             @if (User.IsInRole("User"))

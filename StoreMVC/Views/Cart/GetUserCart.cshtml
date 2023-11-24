@@ -38,8 +38,8 @@
                         }
                     </td>
                     <td>@item.Product.Category.CategoryName</td>
-                    <td>@item.Product.Price X @item.Quantity</td>
-                    <td>@(item.Product.Price * item.Quantity)</td>
+                    <td>@item.Product.Price</td>
+                    <td>@item.Quantity</td>
                     <td>
                         <a class="btn btn-danger" href="/Cart/AddProduct?productId=@item.ProductId&&redirect=1">+</a>
                         <a class="btn btn-danger" href="/Cart/RemoveProduct?productId=@item.ProductId">-</a>

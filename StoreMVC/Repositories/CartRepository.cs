@@ -1,10 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using StoreMVC.Areas.Identity.Data;
-using System.Data.Common;
-using System.Runtime.CompilerServices;
-using System.Security.Claims;
 
 namespace StoreMVC.Repositories
 {

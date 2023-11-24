@@ -68,17 +68,17 @@
     {
         <div class="card mx-3 mb-4" style="width: 14rem;">
             <div class="row">
-                <div class="col-md-12 d-flex justify-content-center align-items-center" style="margin: 20px 0 0">
+                <div class="col-md-12 d-flex justify-content-center align-items-center" >
                     @if (string.IsNullOrEmpty(product.Image))
                     {
-                        <svg width="300" height="300" xmlns="http://www.w3.org/2000/svg" role="img">
+                        <svg width="283" height="315" style="color: white" xmlns="http://www.w3.org/2000/svg" role="img">
                             <rect width="100%" height="100%" rx="10" fill="#666"> </rect>
-                            <text x="40%" y="50%" fill="#444" dy=".3em">No photo</text>
+                            <text x="40%" y="50%" fill="#444">No photo</text>
                         </svg>
                     }
                     else
                     {
-                        <img style="width:100%;height:100%" src="~/img/product/@product.Image" class="card-img-top" alt="...">
+                        <img src="~/img/product/@product.Image" class="card-img-top">
                     }
                 </div>
                 <div class="card-body">
@@ -101,12 +101,7 @@
         async function add(productId) {
             var usernameEl = document.getElementById("username");
             if (usernameEl == null) {
-                console.log("eweq");
                 window.location.href = "/Identity/Account/Login";
-                // var username = usernameEl.innerText;
-                // if (username.length < 1) {
-                //     window.location.href = "/Identity/Account/Login";
-                // }
             }
             try {
                 var response = await fetch(`/Cart/AddProduct?productId=${productId}`);
@@ -116,9 +111,6 @@
                     cartCountEl.innerHTML = result;
                     window.location.href = "#cartCount";
                 }
-                // else {
-                //     alert(`${response.status}`);
-                // }
             }
             catch (err) {
                 console.log(err);

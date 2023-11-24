@@ -1,8 +1,4 @@
-﻿
-
-using Humanizer.Localisation;
-using Microsoft.EntityFrameworkCore;
-using static System.Reflection.Metadata.BlobBuilder;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace StoreMVC.Repositories
 {
@@ -15,7 +11,7 @@ namespace StoreMVC.Repositories
             _db = db;
         }
 
-        public async Task<IEnumerable<Category>> Categories()
+        public async Task<IEnumerable<Category>> GetCategoriesAsync()
         {
             return await _db.Categories.ToListAsync();
         }
@@ -24,6 +20,8 @@ namespace StoreMVC.Repositories
         {
             sTerm = sTerm.ToLower();
 
+            //Запрос LINQ: Выполняется запрос к базе данных, объединяя таблицы Products и Categories по CategoryId, фильтруя результаты
+            //в соответствии с параметрами sTerm и categoryId. Возвращается список продуктов с выбранными полями.
             IEnumerable<Product> products = await (from product in _db.Products
                                   join category in _db.Categories
                                   on product.CategoryId equals category.Id
