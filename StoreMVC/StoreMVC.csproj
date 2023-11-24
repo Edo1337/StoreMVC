@@ -9,7 +9,6 @@
   <ItemGroup>
     <None Include="wwwroot\img\cute_kotik_for_register.png" />
     <None Include="wwwroot\img\photo_2023-07-09_01-13-14.jpg" />
-    <None Include="wwwroot\img\photorealism image for a display for a virtual pet %281%29.jpg" />
   </ItemGroup>
 
   <ItemGroup>
