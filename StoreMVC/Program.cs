@@ -18,8 +18,10 @@ builder.Services
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+//Регистрируем сервисы
 builder.Services.AddTransient<IHomeRepository, HomeRepository>();
 builder.Services.AddTransient<ICartRepository, CartRepository>();
+builder.Services.AddTransient<IUserOrderRepository, UserOrderRepository>();
 builder.Services.AddRazorPages();
 
 builder.Services.Configure<IdentityOptions>(options =>
