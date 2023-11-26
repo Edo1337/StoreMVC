@@ -9,7 +9,7 @@ namespace StoreMVC.Data;
 public class StoreAuthDbContext : IdentityDbContext<ApplicationUser>
 {
     public StoreAuthDbContext(DbContextOptions<StoreAuthDbContext> options)
-        : base(options)
+        : base(options) 
     {
     }
 
