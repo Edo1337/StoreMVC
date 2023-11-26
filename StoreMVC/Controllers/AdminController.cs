@@ -50,7 +50,7 @@ namespace StoreMVC.Controllers
         public IActionResult Create()
         {
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "CategoryName");
-            return View();
+            return View("Edit", new Product());
         }
 
         // POST: Admin/Create
@@ -117,12 +117,12 @@ namespace StoreMVC.Controllers
                         throw;
                     }
                 }
+                TempData["message"] = string.Format("Изменения в товаре \"{0}\" были сохранены", product.ProductName);
                 return RedirectToAction(nameof(Index));
             }
-            if (!ModelState.IsValid)
+            else
             {
                 var errors = ModelState.Values.SelectMany(v => v.Errors);
-                // Здесь вы можете записать ошибки в лог или выводить в консоль
                 foreach (var error in errors)
                 {
                     Console.WriteLine(error.ErrorMessage);
