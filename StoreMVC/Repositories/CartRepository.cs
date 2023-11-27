@@ -32,7 +32,8 @@ namespace StoreMVC.Repositories
                     {
                         UserId = userId
                     };
-                    await _db.ShoppingCarts.AddAsync(cart);//у него не асинхр
+
+                    await _db.ShoppingCarts.AddAsync(cart);
                 }
                 _db.SaveChanges();
                 //cart detail section
@@ -49,7 +50,7 @@ namespace StoreMVC.Repositories
                         Quantity = qty,
                         UnitPrice = product.Price
                     };
-                    await _db.CartDetails.AddAsync(cartProduct);
+                    _db.CartDetails.Add(cartProduct);
                 }
                 _db.SaveChanges();
                 transaction.Commit();
