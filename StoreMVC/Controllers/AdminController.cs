@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol.Core.Types;
-using StoreMVC.Data;
 using StoreMVC.Models;
 
 namespace StoreMVC.Controllers

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using StoreMVC.Constants;
 
-namespace StoreMVC.Areas.Identity.Data
+namespace StoreMVC.Data
 {
     public class DbSeeder
     {

@@ -18,7 +18,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using StoreMVC.Areas.Identity.Data;
 using StoreMVC.Constants;
 
 namespace StoreMVC.Areas.Identity.Pages.Account

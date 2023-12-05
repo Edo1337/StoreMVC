@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using StoreMVC.Areas.Identity.Data;
 using StoreMVC.Models;
 
 namespace StoreMVC.Data;
@@ -9,7 +8,7 @@ namespace StoreMVC.Data;
 public class StoreAuthDbContext : IdentityDbContext<ApplicationUser>
 {
     public StoreAuthDbContext(DbContextOptions<StoreAuthDbContext> options)
-        : base(options) 
+        : base(options)
     {
     }
 
@@ -20,6 +19,11 @@ public class StoreAuthDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderDetail> OrderDetails { get; set; }
     public DbSet<OrderStatus> OrderStatuses { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.LogTo(Console.WriteLine);
+    }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
