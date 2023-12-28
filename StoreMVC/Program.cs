@@ -16,6 +16,7 @@ builder.Services
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
 //Регистрируем сервисы
 builder.Services.AddTransient<IHomeRepository, HomeRepository>();
 builder.Services.AddTransient<ICartRepository, CartRepository>();

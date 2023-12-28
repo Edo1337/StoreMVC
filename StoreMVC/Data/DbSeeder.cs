@@ -27,7 +27,7 @@ namespace StoreMVC.Data
             var userInDb = await userMgr.FindByEmailAsync(admin.Email);
             if (userInDb is null)
             {
-                await userMgr.CreateAsync(admin, "Perfect_passw0rd"); //Аккуратно с паролем, очень важно указывать пароль, подходящий по требованиям (кто бы мог подумать, 1 час с этим ебався..)
+                await userMgr.CreateAsync(admin, "Perfect_passw0rd");
                 await userMgr.AddToRoleAsync(admin, Roles.Admin.ToString());
             }
         }
