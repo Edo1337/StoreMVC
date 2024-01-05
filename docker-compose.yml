@@ -1,0 +1,32 @@
+version: '3.4'
+
+networks:
+  demoapp:
+
+services:
+  demoappdb:
+    container_name: test-storemvc-db
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+      - 8002:1433
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=yourStrong(!)Password
+    networks:
+      - demoapp
+  storemvc:
+    container_name: test-storemvc
+    image: ${DOCKER_REGISTRY-}storemvc
+    build:
+      context: .
+      dockerfile: StoreMVC/Dockerfile
+    ports:
+      - 8001:80
+    depends_on:
+      - demoappdb
+    environment:
+      - DB_HOST=demoappdb
+      - DB_NAME=StoreMVC_Auth_db
+      - DB_SA_PASSWORD=yourStrong(!)Password
+    networks:
+      - demoapp

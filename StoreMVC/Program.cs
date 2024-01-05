@@ -3,11 +3,17 @@ using Microsoft.EntityFrameworkCore;
 using StoreMVC;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("StoreAuthDbContextConnection") ?? throw new InvalidOperationException("Connection string 'StoreAuthDbContextConnection' not found.");
+//var connectionString = builder.Configuration.GetConnectionString("StoreAuthDbContextConnection") ?? throw new InvalidOperationException("Connection string 'StoreAuthDbContextConnection' not found.");
 
+// Внедрение зависимостей 
+var dbHost = Environment.GetEnvironmentVariable("DB_HOST");//localhost?
+var dbName = Environment.GetEnvironmentVariable("DB_NAME");
+var dbPassword = Environment.GetEnvironmentVariable("DB_SA_PASSWORD");
+var connectionString = $"Data Source={dbHost};Initial Catalog=StoreMVC_Auth_db;User ID=sa;password={dbPassword};Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True;";
+//var connectionString = $"Data Source=localhost;Initial Catalog=StoreMVC_Auth_db;User ID=sa;password=yourStrong(!)Password;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True;";
 builder.Services.AddDbContext<StoreAuthDbContext>(options => options.UseSqlServer(connectionString));
 
-//Настройки Identity
+// Настройки Identity
 builder.Services
     .AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<StoreAuthDbContext>()
@@ -17,23 +23,23 @@ builder.Services
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-//Регистрируем сервисы
+// Регистрируем сервисы
 builder.Services.AddTransient<IHomeRepository, HomeRepository>();
 builder.Services.AddTransient<ICartRepository, CartRepository>();
 builder.Services.AddTransient<IUserOrderRepository, UserOrderRepository>();
 builder.Services.AddRazorPages();
 
-//Конфигурация параметров Identity
+// Конфигурация параметров Identity
 builder.Services.Configure<IdentityOptions>(options =>
     {
         options.Password.RequireUppercase = false;
         options.Password.RequireNonAlphanumeric = false;
     });
 
-//Создание и настройка приложения
+// Создание и настройка приложения
 var app = builder.Build();
 
-//Создали админа единожды и закомментили код
+// Создали админа единожды и закомментили код
 //using (var scope = app.Services.CreateScope())
 //{
 //    await DbSeeder.SeedDefaultDataAsync(scope.ServiceProvider);
@@ -47,13 +53,13 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-//Найстройка промежуточного ПО
+// Найстройка промежуточного ПО
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
 
-//Конфигурация маршрутизации
+// Конфигурация маршрутизации
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
