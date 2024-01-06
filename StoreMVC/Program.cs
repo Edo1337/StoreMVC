@@ -8,8 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Внедрение зависимостей 
 var dbHost = Environment.GetEnvironmentVariable("DB_HOST");//localhost?
 var dbName = Environment.GetEnvironmentVariable("DB_NAME");
-var dbPassword = Environment.GetEnvironmentVariable("DB_SA_PASSWORD");
-var connectionString = $"Data Source={dbHost};Initial Catalog=StoreMVC_Auth_db;User ID=sa;password={dbPassword};Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True;";
+var dbPassword = Environment.GetEnvironmentVariable("DB_MSSQL_SA_PASSWORD");
+var connectionString = $"Data Source={dbHost};Initial Catalog={dbName};User ID=sa;password={dbPassword};Trusted_Connection=True;TrustServerCertificate=True";
 //var connectionString = $"Data Source=localhost;Initial Catalog=StoreMVC_Auth_db;User ID=sa;password=yourStrong(!)Password;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True;";
 builder.Services.AddDbContext<StoreAuthDbContext>(options => options.UseSqlServer(connectionString));
 
