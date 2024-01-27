@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
 using StoreMVC.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace StoreMVC.Data;
 
@@ -10,6 +12,22 @@ public class StoreAuthDbContext : IdentityDbContext<ApplicationUser>
     public StoreAuthDbContext(DbContextOptions<StoreAuthDbContext> options)
         : base(options)
     {
+        // Создаем БД, если ее нету (актуально для докера)
+        try
+        {
+            var databaseCreator = Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator;
+            if(databaseCreator != null)
+            {
+                if (!databaseCreator.CanConnect())
+                    databaseCreator.Create();
+                if (!databaseCreator.HasTables())
+                    databaseCreator.CreateTables();
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
     }
 
     public DbSet<Category> Categories { get; set; }
