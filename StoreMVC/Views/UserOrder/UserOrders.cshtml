@@ -2,9 +2,10 @@
 @{
     ViewData["Title"] = "Мои заказы";
 }
+
+    <div style="text-align: center"><h2>@ViewData["Title"]</h2></div>
 <div style="width:100%;margin:auto" class="mt-2">
     <a href="/Identity/Account/Manage" class="btn btn-dark my-2">Назад</a>
-    <h1>Мои заказы</h1>
     @if (Model != null && Model.Count() > 0)
     {
         <div>

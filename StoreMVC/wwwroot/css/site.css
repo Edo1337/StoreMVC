@@ -5,7 +5,7 @@
 header {
     height: 60px 60px;
     margin: 0 0 60px;
-    background: #fdc180;
+    background: #d4a59a;
 }
 
 .header_manage {
@@ -54,11 +54,11 @@ li a {
 
 
 body {
-    background: #FDF5E6;
+    background: #f3e0dc;
 }
 
 .container-fluid {
-    background: #fdc180;
+    background: #d4a59a;
 }
 
 .btn {
