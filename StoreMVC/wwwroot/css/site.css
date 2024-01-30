@@ -8,6 +8,21 @@ header {
     background: #fdc180;
 }
 
+.header_manage {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 50px;
+    list-style: none;
+}
+
+    .header_manage li a {
+        position: relative;
+        color: black;
+        text-decoration: none;
+    }
+
 li a {
     position: relative;
     color: black;

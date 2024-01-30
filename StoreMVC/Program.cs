@@ -27,6 +27,7 @@ builder.Services.AddControllersWithViews();
 // Регистрируем сервисы
 builder.Services.AddTransient<IHomeRepository, HomeRepository>();
 builder.Services.AddTransient<ICartRepository, CartRepository>();
+builder.Services.AddTransient<IProductRepository, ProductRepository>(); //хз надо или надо
 builder.Services.AddTransient<IUserOrderRepository, UserOrderRepository>();
 builder.Services.AddRazorPages();
 

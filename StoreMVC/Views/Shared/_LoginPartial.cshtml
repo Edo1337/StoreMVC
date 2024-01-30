@@ -4,7 +4,7 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-<ul class="navbar-nav text-right">
+<ul class="navbar-nav text-right" style="text-transform: uppercase; color:black">
 
     @if (SignInManager.IsSignedIn(User))
     {
@@ -18,7 +18,7 @@
         {
             <li class="nav-item">
                 <a class="nav-link" asp-controller="Admin" asp-action="Index">
-                    АДМИН-ПАНЕЛЬ
+                    Админ-панель
                 </a>
             </li>
         }
