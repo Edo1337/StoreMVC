@@ -14,11 +14,12 @@
         <section>
             <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" autocomplete="off">
                 <div class="container">
-                    <h1>Регистрация</h1>
-                    <hr class="border-0" />
-                    <p>Пожалуйста, заполните эту форму, чтобы создать учетную запись.</p>
-                    <hr class="border-0" />
-
+                    <div style="text-align: center; font-family: 'Oswald', sans-serif">
+                        <h1>Регистрация</h1>
+                        <hr class="border-0" />
+                        <p>Пожалуйста, заполните эту форму, чтобы создать учетную запись.</p>
+                        <hr class="border-0" />
+                    </div>
                     <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                     <div class="row justify-content-center">
                         <div class="col-md-6">
