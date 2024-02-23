@@ -33,4 +33,13 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Uploads\Product\3\" />
+    <Folder Include="wwwroot\Uploads\Product\4\" />
+    <Folder Include="wwwroot\Uploads\Product\5\" />
+    <Folder Include="wwwroot\Uploads\Product\6\" />
+    <Folder Include="wwwroot\Uploads\Product\2\" />
+    <Folder Include="wwwroot\Uploads\Product\1\" />
+  </ItemGroup>
+
 </Project>

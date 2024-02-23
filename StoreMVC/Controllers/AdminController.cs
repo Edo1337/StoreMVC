@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CReshetka.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -14,11 +16,19 @@ namespace StoreMVC.Controllers
     [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
+        private readonly IFileService _fileService;
         private readonly StoreAuthDbContext _context;
-
-        public AdminController(StoreAuthDbContext context)
+        private readonly UserManager<ApplicationUser> _userManager;
+        public IFormFile ImageFile { get; set; }
+        public AdminController(
+            StoreAuthDbContext context,
+            UserManager<ApplicationUser> userManager,
+            IFileService fileService
+            )
         {
+            _fileService = fileService;
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Admin
@@ -55,14 +65,18 @@ namespace StoreMVC.Controllers
         }
 
         // POST: Admin/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ProductName,ManufacturerName,Description,Price,Image,CategoryId")] Product product)
+        public async Task<IActionResult> Create([Bind("Id,ProductName,ManufacturerName,Description,Price,Image,CategoryId")] Product product, IFormFile ImageFile)
         {
             if (ModelState.IsValid)
             {
+                var result = _fileService.SaveImage(ImageFile);
+                if (result.Item1 == 1)
+                {
+                    product.Image = result.Item2;
+                }
+
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -89,11 +103,9 @@ namespace StoreMVC.Controllers
         }
 
         // POST: Admin/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ProductName,ManufacturerName,Description,Price,Image,CategoryId")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ProductName,ManufacturerName,Description,Price,Image,CategoryId")] Product product, IFormFile ImageFile)
         {
             if (id != product.Id)
             {
@@ -104,8 +116,18 @@ namespace StoreMVC.Controllers
             {
                 try
                 {
+                    var result = _fileService.SaveImage(ImageFile);
+                    if (result.Item1 == 1)
+                    {
+                        var oldImage = product.Image;
+                        product.Image = result.Item2;
+                        var deleteResult = _fileService.DeleteImage(oldImage);
+                    }
+
                     _context.Update(product);
                     await _context.SaveChangesAsync();
+                    ViewBag.Message = string.Format("Изменения в товаре \"{0}\" были сохранены", product.ProductName);
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -118,18 +140,7 @@ namespace StoreMVC.Controllers
                         throw;
                     }
                 }
-                TempData["message"] = string.Format("Изменения в товаре \"{0}\" были сохранены", product.ProductName);
-                return RedirectToAction(nameof(Index));
             }
-            else
-            {
-                var errors = ModelState.Values.SelectMany(v => v.Errors);
-                foreach (var error in errors)
-                {
-                    Console.WriteLine(error.ErrorMessage);
-                }
-            }
-
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "CategoryName", product.CategoryId);
             return View(product);
         }
@@ -171,6 +182,8 @@ namespace StoreMVC.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+
 
         private bool ProductExists(int id)
         {

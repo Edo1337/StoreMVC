@@ -8,12 +8,11 @@
         <div class="col-12">
             <label class="visually-hidden" for="categoryId">Категории</label>
             <select class="form-select" id="categoryId" name="categoryId">
-                <option selected>Категории</option>
+                <option selected>Все категории</option>
                 @foreach (var category in Model.Categories)
                 {
                     <option selected="@(category.Id == Model.CategoryId)" value="@category.Id">@category.CategoryName</option>
                 }
-                <option selected>Категории</option>
             </select>
         </div>
 
@@ -21,7 +20,7 @@
             <label class="visually-hidden" for="sterm">Поиск по названию</label>
             <div class="input-group">
                 <div class="input-group-text"></div>
-                <input type="text" class="form-control" value="@Model.STerm" id="sterm" placeholder="Поиск по названию">
+                <input type="text" class="form-control" value="@Model.STerm" id="sterm" placeholder="Поиск по категориям">
             </div>
         </div>
 
@@ -115,7 +114,7 @@
 <div class="w-100 mt-4 d-flex flex-wrap justify-content-center">
     @foreach (var product in Model.Products)
     {
-        <div class="card text-center mx-4 mb-4 h-150 d-flex flex-column border-0" style="width: 16rem; background-color: #f3e0dc">
+        <div class="card text-center mx-4 mb-5 h-150 d-flex flex-column border-0" style="width: 16rem; background-color: #f3e0dc">
             <div class="content">
                 <div class="back">
                     <div class="back-content" style="background-color: white">
@@ -128,7 +127,8 @@
                         }
                         else
                         {
-                            <img src="~/img/product/1/@product.Image" class="card-img-top">
+@*                             <img src="~/Uploads/Product/@product.CategoryId/@product.ProductName/@product.Image" class="card-img-top">
+ *@                            <img src="~/Uploads/Product/@product.Image" class="card-img-top">
                         }
                         <strong style="color:black; ">@product.ProductName</strong>
                     </div>
@@ -136,7 +136,7 @@
                 <div class="front">
 
                     <div class="img">
-                            <img src="~/img/product/1/@product.Image" class="card-img-top">
+                        <img src="~/Uploads/Product/@product.Image" class="card-img-top">
                     </div>
 
                     <div class="front-content">

@@ -1,3 +1,4 @@
+using CReshetka.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using StoreMVC;
@@ -15,6 +16,7 @@ var connectionString = $"Data Source=localhost;Initial Catalog=StoreMVC_Auth_db;
 builder.Services.AddDbContext<StoreAuthDbContext>(options => options.UseSqlServer(connectionString));
 
 // Настройки Identity
+
 builder.Services
     .AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<StoreAuthDbContext>()
@@ -22,6 +24,7 @@ builder.Services
     .AddDefaultTokenProviders();
 
 // Add services to the container.
+builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddControllersWithViews();
 
 // Регистрируем сервисы

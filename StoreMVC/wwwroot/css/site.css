@@ -55,7 +55,8 @@ li a {
 
 body {
     background: #f3e0dc;
-}
+/*    overflow: hidden;
+*/}
 
 .container-fluid {
     background: #d4a59a;
