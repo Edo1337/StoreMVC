@@ -13,12 +13,13 @@
         <div class="panel-heading m-4 text-center">
             <h2><strong>Список продуктов</strong></h2>
         </div>
-        <div class="panel-footer">
+        <div class="panel-footer m-3">
             @Html.ActionLink("Добавить продукт", "Create", null,
-            new { @class = "btn btn-default" })
-        <a class="nav-link" asp-controller="Home" asp-action="Index">
-            Назад
-        </a>
+                     new { @class = "btn btn-default" })
+            <a class="nav-link" href="#"> Управление категориями (soon)</a>
+            <a class="nav-link" asp-controller="Home" asp-action="Index">
+                Назад
+            </a>
         </div>
 
         <div class="panel-body">
