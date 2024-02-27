@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace StoreMVC.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "User")]
     public class CartController : Controller
     {
         private readonly ICartRepository _cartRepo;

@@ -17,99 +17,19 @@
         </div>
 
         <div class="col-12">
-            <label class="visually-hidden" for="sterm">Поиск по названию</label>
             <div class="input-group">
                 <div class="input-group-text"></div>
-                <input type="text" class="form-control" value="@Model.STerm" id="sterm" placeholder="Поиск по категориям">
+                <input type="text" class="form-control" value="@Model.STerm" id="sterm" placeholder="Поиск по названию">
             </div>
         </div>
-
         <div class="col-12">
+            <label class="visually-hidden" for="sterm">Поиск по названию</label>
             <button type="submit" class="btn btn-primary">Поиск</button>
-            <a href="~/Home/Index" type="reset" class="btn btn-dark">Сброс</a>
         </div>
     </form>
 </div>
 
 <hr class="border-0" />
-
-@* <div id="carouselExampleIndicators" class="carousel slide">
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="/img/carusel/carusel1.jpg" class="d-block w-100" style="border-radius: 15px" alt="...">
-        </div>
-        <div class="carousel-item">
-            <img src="/img/carusel/carusel2.jpg" class="d-block w-100" style="border-radius: 15px" alt="...">
-        </div>
-        <div class="carousel-item">
-            <img src="/img/carusel/carusel3.jpg" class="d-block w-100" style="border-radius: 15px" alt="...">
-        </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
-</div>
- *@
-@* <div class="w-100 mt-4 d-flex flex-wrap justify-content-center">
-    @foreach (var product in Model.Products)
-    {
-        <div class="card text-center mx-4 mb-4 h-150 d-flex flex-column" style="width: 16rem;">
-            <div class="row">
-                <div class="card-body">
-                    <div class="col-md-12 d-flex justify-content-center align-items-center mt-md-2">
-                        @if (string.IsNullOrEmpty(product.Image))
-                        {
-                            <svg width="283" height="315" style="color: white" xmlns="http://www.w3.org/2000/svg" role="img">
-                                <rect width="100%" height="100%" rx="10" fill="#666"></rect>
-                                <text x="40%" y="50%" fill="#444">No photo</text>
-                            </svg>
-                        }
-                        else
-                        {
-                            <img src="~/img/product/1/@product.Image" class="card-img-top">
-                        }
-                    </div>
-                    <h5 class="card-title mb-6"><b>@product.ProductName</b></h5>
-                    <b>Производитель: </b>@product.ManufacturerName<br />
-                    <hr />
-                    <b>Описание: </b>@product.Description
-                </div>
-
-                <div class="wrapper">
-                    <div class="card-footer">
-                        <br class="border-0" />
-                        @if (product.CategoryId == 1)
-                        {
-                            <b>Цена (за 0,5 кг): </b>
-                            @product.Price
-                            <b>руб.</b>
-                            <br />
-                        }
-                        else
-                        {
-                            <b>Цена: </b>
-                            @product.Price <br />
-                        }
-                        <br class="border-0" />
-                        <button type="button" onclick="add(@product.Id)" class="btn btn-primary">Добавить в корзину</button>
-                        <hr class="border-0" />
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    }
-</div> *@
 
 <div class="w-100 mt-4 d-flex flex-wrap justify-content-center">
     @foreach (var product in Model.Products)
@@ -127,8 +47,8 @@
                         }
                         else
                         {
-@*                             <img src="~/Uploads/Product/@product.CategoryId/@product.ProductName/@product.Image" class="card-img-top">
- *@                            <img src="~/Uploads/Product/@product.Image" class="card-img-top">
+                            @*                             <img src="~/Uploads/Product/@product.CategoryId/@product.ProductName/@product.Image" class="card-img-top">
+                    *@                            <img src="~/Uploads/Product/@product.Image" class="card-img-top">
                         }
                         <strong style="color:black; ">@product.ProductName</strong>
                     </div>

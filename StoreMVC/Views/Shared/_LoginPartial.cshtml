@@ -8,12 +8,6 @@
 
     @if (SignInManager.IsSignedIn(User))
     {
-        <li class="nav-item">
-            <a class="nav-link" href="/Cart/GetUserCart">
-                <span id="cartCount" class="badge text-bg-light">0</span>
-                <i class="bi bi-bag text-white"></i>
-            </a>
-        </li>
         @if (User.IsInRole("Admin"))
         {
             <li class="nav-item">
@@ -24,7 +18,12 @@
         }
         @if (User.IsInRole("User"))
         {
-
+            <li class="nav-item">
+                <a class="nav-link" href="/Cart/GetUserCart">
+                    <span id="cartCount" class="badge text-bg-light">0</span>
+                    <i class="bi bi-bag text-white"></i>
+                </a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index">
                     <span id="username">@User.Identity?.Name</span>
