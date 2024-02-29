@@ -19,7 +19,7 @@
         <div class="col-12">
             <div class="input-group">
                 <div class="input-group-text"></div>
-                <input type="text" class="form-control" value="@Model.STerm" id="sterm" placeholder="Поиск по названию">
+                <input type="text" class="form-control" value="@Model.STerm" id="sterm" name="sterm" placeholder="Поиск по названию">
             </div>
         </div>
         <div class="col-12">
@@ -50,7 +50,7 @@
                             @*                             <img src="~/Uploads/Product/@product.CategoryId/@product.ProductName/@product.Image" class="card-img-top">
                     *@                            <img src="~/Uploads/Product/@product.Image" class="card-img-top">
                         }
-                        <strong style="color:black; ">@product.ProductName</strong>
+                        <strong class="m-1" style="color:black; ">@product.ProductName</strong>
                     </div>
                 </div>
                 <div class="front">
