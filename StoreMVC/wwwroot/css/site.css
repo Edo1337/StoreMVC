@@ -4,11 +4,13 @@
 
 header {
     height: 60px 60px;
-    margin: 0 0 60px;
+    margin: 0;
     background: #d4a59a;
+    border-radius: 0px 0px 10px 10px;
+    overflow: hidden;
 }
 
-.header_manage {
+.header-manage {
     height: 100%;
     display: flex;
     align-items: center;
@@ -17,7 +19,7 @@ header {
     list-style: none;
 }
 
-    .header_manage li a {
+    .header-manage li a {
         position: relative;
         color: black;
         text-decoration: none;
@@ -55,12 +57,13 @@ li a {
 
 body {
     background: #f3e0dc;
-/*    overflow: hidden;
-*/}
-
-.container-fluid {
-    background: #d4a59a;
+    /*    overflow: hidden;
+*/
 }
+
+/*.container-fluid {
+    background: #d4a59a;
+}*/
 
 .btn {
     color: whitesmoke;
@@ -71,6 +74,39 @@ body {
     color: black;
 }
 
+.header-container {
+    border-radius: 10px; /* Примерное значение радиуса закругления */
+    overflow: hidden; /* Обрезаем всё, что выходит за рамки */
+}
+
+    .header-container .navbar {
+        border-radius: 10px; /* Примерное значение радиуса закругления для внутренних элементов */
+    }
+
+    .header-container .container-fluid {
+        border-radius: 10px; /* Примерное значение радиуса закругления для внутренних элементов */
+    }
+
+    .header-container .form-select {
+        border-radius: 10px; /* Примерное значение радиуса закругления для внутренних элементов */
+    }
+
+    .header-container .input-group {
+        border-radius: 10px; /* Примерное значение радиуса закругления для внутренних элементов */
+    }
+
+    .header-container .btn {
+        border-radius: 10px; /* Примерное значение радиуса закругления для внутренних элементов */
+    }
+
+    .header-container,
+    .header-container * {
+        margin: 0;
+    }
+
+.header-container {
+    clear: both;
+}
 
 .card {
     position: relative;

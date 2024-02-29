@@ -3,95 +3,102 @@
     ViewData["Title"] = "Главная";
 }
 
-<div class="my-2">
-    <form asp-action="Index" class="row row-cols-lg-auto g-3 align-items-center">
-        <div class="col-12">
-            <label class="visually-hidden" for="categoryId">Категории</label>
-            <select class="form-select" id="categoryId" name="categoryId">
-                <option selected>Все категории</option>
-                @foreach (var category in Model.Categories)
-                {
-                    <option selected="@(category.Id == Model.CategoryId)" value="@category.Id">@category.CategoryName</option>
-                }
-            </select>
-        </div>
-
-        <div class="col-12">
-            <div class="input-group">
-                <div class="input-group-text"></div>
-                <input type="text" class="form-control" value="@Model.STerm" id="sterm" name="sterm" placeholder="Поиск по названию">
-            </div>
-        </div>
-        <div class="col-12">
-            <label class="visually-hidden" for="sterm">Поиск по названию</label>
-            <button type="submit" class="btn btn-primary">Поиск</button>
-        </div>
-    </form>
-</div>
-
-<hr class="border-0" />
-
-<div class="w-100 mt-4 d-flex flex-wrap justify-content-center">
-    @foreach (var product in Model.Products)
-    {
-        <div class="card text-center mx-4 mb-5 h-150 d-flex flex-column border-0" style="width: 16rem; background-color: #f3e0dc">
-            <div class="content">
-                <div class="back">
-                    <div class="back-content" style="background-color: white">
-                        @if (string.IsNullOrEmpty(product.Image))
-                        {
-                            <svg width="283" height="315" style="color: white" xmlns="http://www.w3.org/2000/svg" role="img">
-                                <rect width="100%" height="100%" rx="10" fill="#666"></rect>
-                                <text x="40%" y="50%" fill="#444">No photo</text>
-                            </svg>
-                        }
-                        else
-                        {
-                            @*                             <img src="~/Uploads/Product/@product.CategoryId/@product.ProductName/@product.Image" class="card-img-top">
-                    *@                            <img src="~/Uploads/Product/@product.Image" class="card-img-top">
-                        }
-                        <strong class="m-1" style="color:black; ">@product.ProductName</strong>
-                    </div>
-                </div>
-                <div class="front">
-
-                    <div class="img">
-                        <img src="~/Uploads/Product/@product.Image" class="card-img-top">
-                    </div>
-
-                    <div class="front-content">
-                        <small class="badge" style="color:black">@product.ManufacturerName</small>
-                        <div class="description">
-                            <div class="title">
-                                <p>
-                                    <strong>@product.Description</strong>
-                                </p>
+<div class="container">
+    <div class="header-container mb-5">
+        <header class="navbar navbar-expand-lg">
+            <div class="container-fluid" style="color: rosybrown">
+                <form asp-action="Index" class="row row-cols-lg-auto g-3 align-items-center">
+                    <ul class="navbar-nav me-auto" style="text-transform: uppercase">
+                        <li class="nav-item col-12 m-2">
+                            <label class="visually-hidden" for="categoryId">Категории</label>
+                            <select class="form-select" id="categoryId" name="categoryId">
+                                <option selected>Все категории</option>
+                                @foreach (var category in Model.Categories)
+                                {
+                                    <option selected="@(category.Id == Model.CategoryId)" value="@category.Id">@category.CategoryName</option>
+                                }
+                            </select>
+                        </li>
+                        <li class="nav-item col-12 m-2">
+                            <div class="input-group">
+                                <div class="input-group-text"></div>
+                                <input type="text" class="form-control" value="@Model.STerm" id="sterm" name="sterm" placeholder="Поиск по названию">
                             </div>
-                            <div class="card-footer">
-                                <br class="border-0" />
-                                @if (product.CategoryId == 1)
-                                {
-                                    <b>Цена (за 0,5 кг): </b>
-                                    @product.Price
-                                    <b>руб.</b>
-                                    <br />
-                                }
-                                else
-                                {
-                                    <b>Цена: </b>
-                                    @product.Price <br />
-                                }
-                                <br class="border-0" />
-                                <button type="button" onclick="add(@product.Id)" class="btn btn-primary">Добавить в корзину</button>
-                                <hr class="border-0" />
+                        </li>
+                        <li class="nav-item col-12 m-2">
+                            <label class="visually-hidden" for="sterm">Поиск по названию</label>
+                            <button type="submit" class="btn btn-primary">Поиск</button>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </header>
+    </div>
 
+
+    <div class="w-100 mt-4 d-flex flex-wrap justify-content-center">
+        @foreach (var product in Model.Products)
+        {
+            <div class="card text-center mx-4 mb-5 h-150 d-flex flex-column border-0" style="width: 16rem; background-color: #f3e0dc">
+                <div class="content">
+                    <div class="back">
+                        <div class="back-content" style="background-color: white">
+                            @if (string.IsNullOrEmpty(product.Image))
+                            {
+                                <svg width="283" height="315" style="color: white" xmlns="http://www.w3.org/2000/svg" role="img">
+                                    <rect width="100%" height="100%" rx="10" fill="#666"></rect>
+                                    <text x="40%" y="50%" fill="#444">No photo</text>
+                                </svg>
+                            }
+                            else
+                            {
+                                @*                             <img src="~/Uploads/Product/@product.CategoryId/@product.ProductName/@product.Image" class="card-img-top">
+                        *@                            <img src="~/Uploads/Product/@product.Image" class="card-img-top">
+                            }
+                            <strong class="m-1" style="color:black; ">@product.ProductName</strong>
+                        </div>
+                    </div>
+                    <div class="front">
+
+                        <div class="img">
+                            <img src="~/Uploads/Product/@product.Image" class="card-img-top">
+                        </div>
+
+                        <div class="front-content">
+                            <small class="badge" style="color:black">@product.ManufacturerName</small>
+                            <div class="description">
+                                <div class="title">
+                                    <p>
+                                        <strong>@product.Description</strong>
+                                    </p>
+                                </div>
+                                <div class="card-footer">
+                                    <br class="border-0" />
+                                    @if (product.CategoryId == 1)
+                                    {
+                                        <b>Цена (за 0,5 кг): </b>
+                                        @product.Price
+                                        <b>руб.</b>
+                                        <br />
+                                    }
+                                    else
+                                    {
+                                        <b>Цена: </b>
+                                        @product.Price <br />
+                                    }
+                                    <br class="border-0" />
+                                    <button type="button" onclick="add(@product.Id)" class="btn btn-primary">Добавить в корзину</button>
+                                    <hr class="border-0" />
+
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    }
+        }
+    </div>
+
 </div>
 
 @section Scripts {

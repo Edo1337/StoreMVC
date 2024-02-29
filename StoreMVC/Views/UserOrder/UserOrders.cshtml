@@ -3,13 +3,13 @@
     ViewData["Title"] = "Мои заказы";
 }
 
-    <div style="text-align: center"><h2>@ViewData["Title"]</h2></div>
-<div style="width:100%;margin:auto" class="mt-2">
+<stong><div style="text-align: center"><h2>@ViewData["Title"]</h2></div></stong>
+<div style="width:100%;margin: 0; border-radius: 0px 0px 10px 10px;" class="mt-2">
     <a href="/Identity/Account/Manage" class="btn btn-dark my-2">Назад</a>
     @if (Model != null && Model.Count() > 0)
     {
         <div>
-            <table class="table table-striped">
+            <table class="table table-striped mb-5">
                 <tr>
                     <th>Дата заказа</th>
                     <th>Статус заказа</th>
@@ -24,7 +24,7 @@
                     {
                         <tr>
                             <td>
-                                <table class="table table-striped text-center ">
+                                <table class="table table-striped text-center">
                                     <tr>
                                         <th>Продукт</th>
                                         <th>Фото</th>
@@ -48,7 +48,7 @@
                                                 }
                                                 else
                                                 {
-                                                    <img style="width:100px;height:120px" src="~/img/product/1/@item.Product.Image" class="card-img-top">
+                                                    <img style="width:100px;height:120px" src="~/Uploads/Product/@item.Product.Image" class="card-img-top">
                                                 }
                                             </td>
                                             <td>@item.Product.Category.CategoryName</td>
@@ -72,6 +72,7 @@
                         </tr>
                         
                     }
+                    
                 }
             </table>
         </div>
