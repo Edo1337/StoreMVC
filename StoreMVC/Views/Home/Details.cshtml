@@ -1,119 +1,59 @@
 ﻿@model StoreMVC.Models.Product
 
 @{
-    ViewBag.Title = "Админ панель: редактирование товара";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container">
-    <div class="panel mb-10">
-        @if (string.IsNullOrEmpty(Model.ProductName))
-        {
-            <div class="panel-heading text-center m-4">
-                <h3><strong>Создание продукта</strong></h3>
-            </div>
-        }
-        else
-        {
-            <div class="panel-heading text-center m-4">
-                <h3><strong>Редактирование продукта «@Model.ProductName»</strong></h3>
-            </div>
-            <div class="card text-center mx-4 m-5 h-150 d-flex flex-column border-0" style="width: 16rem; background-color: #f3e0dc">
-                <div class="content">
-                    <div class="back">
-                        <div class="back-content" style="background-color: white">
-                            @if (string.IsNullOrEmpty(Model.Image))
-
-                            {
-                                <svg width="283" height="315" style="color: white" xmlns="http://www.w3.org/2000/svg" role="img">
-                                    <rect width="100%" height="100%" rx="10" fill="#666"></rect>
-                                    <text x="40%" y="50%" fill="#444">No photo</text>
-                                </svg>
-                            }
-                            else
-                            {
-                                <img src="~/Uploads/Product/@Model.Image" class="card-img-top">
-                            }
-                            <strong style="color:black; ">@Model.ProductName</strong>
-                        </div>
-                    </div>
-                    <div class="front">
-
-                        <div class="img">
-                            <img src="~/Uploads/Product/@Model.Image" class="card-img-top">
-                        </div>
-
-                        <div class="front-content">
-                            <small class="badge" style="color:black">@Model.ManufacturerName</small>
-                            <div class="description">
-                                <div class="title">
-                                    <p>
-                                        <strong>@Model.Description</strong>
-                                    </p>
-                                </div>
-                                <div class="card-footer">
-                                    <br class="border-0" />
-                                    @if (Model.CategoryId == 1)
-                                    {
-                                        <b>Цена (за 0,5 кг): </b>
-                                        @Model.Price
-                                        <b>руб.</b>
-                                        <br />
-                                    }
-                                    else
-                                    {
-                                        <b>Цена: </b>
-                                        @Model.Price < br />
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        }
-
-@*         @using (Html.BeginForm("Edit", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
-        {
-            @Html.AntiForgeryToken()
-            <div class="panel-body">
-                @Html.HiddenFor(m => m.Id)
-                @foreach (var property in ViewData.ModelMetadata.Properties)
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="/Uploads/Product/@Model.Image" class="object-fit-fill ml-3 mr-0 rounded-4 w-9 h-9" style="width:350px;height:350px;display:block;margin:auto;" />
+        </div>
+        <div class="col-md-6">
+            <h2><strong>@Model.ProductName</strong></h2>
+            <h3>@Model.ManufacturerName</h3>
+            <p>@Model.Description</p>
+            <hr>
+            <div class="mb-3">
+                @if (Model.CategoryId == 1)
                 {
-                    if (property.PropertyName != "Id" && property.PropertyName != "OrderDetail" && property.PropertyName != "Category" && property.PropertyName != "CartDetail" && property.PropertyName != "CategoryName")
-                    {
-                        <div class="form-group">
-                            <label>@(property.DisplayName ?? property.PropertyName)</label>
-                            @if (property.PropertyName == "Description")
-                            {
-                                @Html.TextArea(property.PropertyName, Model.Description, new { @class = "form-control", rows = 5 })
-                            }
-                            else if (property.PropertyName == "CategoryId")
-                            {
-                                @Html.TextBox(property.PropertyName, Model.CategoryId, new { @class = "form-control", title = "Текст с информацией" })
-                            }
-                            else if (property.PropertyName == "Image")
-                            {
-                                <div class="m-2">
-                                    <label class="form-label" for="Image"></label>
-                                    <input type="file" name="ImageFile" />
-                                </div>
-                            }
-                            else
-                            {
-                                @Html.TextBox(property.PropertyName, null, new { @class = "form-control" })
-                            }
-                        </div>
-                    }
+                    <b>Цена (за 0,5 кг): </b>
+                    <b>@Model.Price</b>
+                    <b>руб.</b>
+                    <br />
+                }
+                else
+                {
+                    <b>Цена: </b>
+                    @Model.Price < br />
                 }
             </div>
-            <div class="panel-footer m-4">
-                <input type="submit" value="Сохранить" class="btn btn-primary" />
-                @Html.ActionLink("Отменить изменения и вернуться к списку", "Index", "Admin", null, new
-                    {
-                        @class = "btn btn-default"
-                    })
-            </div>
-        }
- *@    </div>
+            <form>
+                <button type="button" onclick="add(@Model.Id)" class="btn btn-success text-white">Добавить в корзину</button>
+            </form>
+        </div>
+    </div>
 </div>
+
+@section Scripts {
+    <script>
+        async function add(productId) {
+            var usernameEl = document.getElementById("username");
+            if (usernameEl == null) {
+                window.location.href = "/Identity/Account/Login";
+            }
+            try {
+                var response = await fetch(`/Cart/AddProduct?productId=${productId}`);
+                if (response.status == 200) {
+                    var result = await response.json();
+                    var cartCountEl = document.getElementById("cartCount");
+                    cartCountEl.innerHTML = result;
+                    window.location.href = "#cartCount";
+                }
+            }
+            catch (err) {
+                console.log(err);
+            }
+        }
+    </script>
+}
