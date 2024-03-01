@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using StoreMVC.Models;
 
 namespace StoreMVC.Repositories
 {
@@ -197,5 +198,28 @@ namespace StoreMVC.Repositories
             return userId;
         }
 
+        public async Task<bool> ClearCart()
+        {
+            using var transaction = _db.Database.BeginTransaction();
+
+            var userId = GetUserId();
+            if (string.IsNullOrEmpty(userId))
+                throw new Exception("Пользователь не вошел в систему");
+
+            var cart = await GetCartAsync(userId);
+            if (cart is null)
+                throw new Exception("Корзина не действительная");
+
+            var cartDetail = _db.CartDetails
+                                .Where(a => a.ShoppingCartId == cart.Id).ToList();
+
+            if (cartDetail.Count == 0)
+                throw new Exception("Корзина пустая");
+
+            _db.CartDetails.RemoveRange(cartDetail);
+            _db.SaveChanges();
+            transaction.Commit();
+            return true;
+        }
     }
 }

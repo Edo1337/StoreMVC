@@ -8,5 +8,7 @@
         Task<int> GetCartProductCountAsync(string userId = "");
         Task<bool> DoCheckout();
         Task<ShoppingCart> GetCartAsync(string userId);
+        Task<bool> ClearCart();
+
     }
 }

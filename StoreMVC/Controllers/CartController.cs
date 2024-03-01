@@ -43,6 +43,14 @@ namespace StoreMVC.Controllers
             bool isCheckedOut = await _cartRepo.DoCheckout();
             if (!isCheckedOut)
                 throw new Exception("Проблема на стороне сервера");
+            return RedirectToAction("UserOrders", "UserOrder");
+        }
+        
+        public async Task<IActionResult> ClearCart()
+        {
+            bool isCheckedOut = await _cartRepo.ClearCart();
+            if (!isCheckedOut)
+                throw new Exception("Проблема на стороне сервера");
             return RedirectToAction("Index", "Home");
         }
 
