@@ -160,6 +160,11 @@ body {
 
 .card:hover .content {
     transform: rotateY(180deg);
+    /*    cursor: pointer;*/
+}
+
+.card::after .back-content{
+    transform: scale(0.95);
 }
 
 @keyframes rotation_481 {
