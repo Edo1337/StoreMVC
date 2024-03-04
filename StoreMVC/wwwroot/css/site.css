@@ -262,3 +262,8 @@ body {
         transform: translateY(0px);
     }
 }
+
+.table {
+    border-radius: 10px; /* Закругление углов */
+    overflow: hidden; /* Обрезаем углы */
+}

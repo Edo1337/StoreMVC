@@ -1,9 +1,13 @@
-﻿@model IEnumerable<Order>
-@{
-    ViewData["Title"] = "Мои заказы";
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<stong><div style="text-align: center"><h2>@ViewData["Title"]</h2></div></stong>
+@{
+    ViewData["Title"] = "Админ панель";
+}
+
+@model IEnumerable<Order>
+
 <div style="width:100%" class="mt-2">
     <a href="/Identity/Account/Manage" class="btn btn-dark my-2">Назад</a>
     @if (Model != null && Model.Count() > 0)
@@ -26,8 +30,10 @@
                             <td>
                                 <table class="table table-hover text-center">
                                     <tr>
+                                        <th>Пользователь</th>
+                                        <th>Дата создания заказа</th>
+                                        <th>Статус заказа</th>
                                         <th>Продукт</th>
-                                        <th>Фото</th>
                                         <th>Категория</th>
                                         <th>Цена</th>
                                         <th>Количество</th>
@@ -35,7 +41,11 @@
 
                                     @foreach (var item in order.OrderDetail)
                                     {
+
                                         <tr>
+                                            <td>@item.Order.UserId</td>
+                                            <td>@item.Order.CreateDate</td>
+                                            <td>@item.Order.OrderStatus</td>
                                             <td>@item.Product.ProductName</td>
                                             <td>
                                                 @if (string.IsNullOrEmpty(item.Product.Image))
