@@ -58,7 +58,6 @@
                                         <b>Цена (за 0,5 кг): </b>
                                         @Model.Price
                                         <b>руб.</b>
-                                        <br />
                                     }
                                     else
                                     {
@@ -109,7 +108,7 @@
             </div>
             <div class="panel-footer m-4">
                 <input type="submit" value="Сохранить" class="btn btn-primary" />
-                @Html.ActionLink("Отменить изменения и вернуться к списку", "Index", "Admin", null, new
+                @Html.ActionLink("Отменить изменения и вернуться к списку", "Products", "Admin", null, new
                     {
                         @class = "btn btn-default"
                     })

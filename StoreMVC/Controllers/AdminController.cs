@@ -19,20 +19,26 @@ namespace StoreMVC.Controllers
         private readonly IFileService _fileService;
         private readonly StoreAuthDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+
+        private readonly IOrderRepository _orderRepos;
+
         public IFormFile ImageFile { get; set; }
         public AdminController(
             StoreAuthDbContext context,
             UserManager<ApplicationUser> userManager,
-            IFileService fileService
+            IFileService fileService,
+            IOrderRepository orderRepos
             )
         {
             _fileService = fileService;
             _context = context;
             _userManager = userManager;
+
+            _orderRepos = orderRepos;
         }
 
-        // GET: Admin
-        public async Task<IActionResult> Index()
+        // GET: Admin/Products
+        public async Task<IActionResult> Products()
         {
             var storeAuthDbContext = _context.Products.Include(p => p.Category);
             return View(await storeAuthDbContext.ToListAsync());
@@ -79,7 +85,7 @@ namespace StoreMVC.Controllers
 
                 _context.Add(product);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Products));
             }
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "CategoryName", product.CategoryId);
             return View(product);
@@ -127,7 +133,7 @@ namespace StoreMVC.Controllers
                     _context.Update(product);
                     await _context.SaveChangesAsync();
                     ViewBag.Message = string.Format("Изменения в товаре \"{0}\" были сохранены", product.ProductName);
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Products));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -180,14 +186,19 @@ namespace StoreMVC.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Products));
         }
-
-
 
         private bool ProductExists(int id)
         {
             return (_context.Products?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        // GET: Admin/Orders
+        public async Task<IActionResult> Orders()
+        {
+            var orders = await _orderRepos.GetAllOrders();
+            return View(orders);
         }
     }
 }
