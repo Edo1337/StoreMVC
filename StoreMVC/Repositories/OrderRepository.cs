@@ -24,8 +24,15 @@ namespace StoreMVC.Repositories
                                     .ThenInclude(x => x.Product)
                                     .ThenInclude(x => x.Category)
                                     .ToListAsync();
+
             return orders;
         }
 
+        public async Task<IEnumerable<OrderStatus>> GetStatusOrders()
+        {
+            var statuses = await _db.OrderStatuses.ToListAsync();
+
+            return statuses;
+        }
     }
 }

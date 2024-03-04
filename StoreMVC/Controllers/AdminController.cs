@@ -37,6 +37,12 @@ namespace StoreMVC.Controllers
             _orderRepos = orderRepos;
         }
 
+        public async Task<IActionResult> Index()
+        {
+            return RedirectToAction("Products");
+        }
+
+
         // GET: Admin/Products
         public async Task<IActionResult> Products()
         {
@@ -198,7 +204,53 @@ namespace StoreMVC.Controllers
         public async Task<IActionResult> Orders()
         {
             var orders = await _orderRepos.GetAllOrders();
+            var statuses = await _orderRepos.GetStatusOrders();
+
+            ViewBag.Statuses = statuses;
+
             return View(orders);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateOrderStatus(int orderId, int orderStatus)
+        {
+            var order = await _context.Orders.FindAsync(orderId);
+            if (order != null)
+            {
+                order.OrderStatusId = orderStatus;
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction("Orders");
+        }
+
+        //[HttpPost]
+        //public IActionResult UpdateOrderStatus(int orderId, int statusId)
+        //{
+        //    // Найдите заказ в базе данных
+        //    var order = _context.Orders
+        //                        .Include(o => o.OrderStatus) 
+        //                        .FirstOrDefault(o => o.Id == orderId);
+
+        //    if (order != null)
+        //    {
+        //        if (order.OrderStatus != null)
+        //        {
+        //            // Измените статус заказа
+        //            order.OrderStatusId = statusId;
+
+        //            // Сохраните изменения в базе данных
+        //            _context.SaveChanges();
+        //        }
+        //        else
+        //        {
+        //            // Обработка случая, когда OrderStatus не загружен
+        //            // Может быть полезно добавить логирование или выбросить исключение
+        //        }
+
+        //    }
+
+        //    return RedirectToAction("Orders");
+        //}
     }
 }

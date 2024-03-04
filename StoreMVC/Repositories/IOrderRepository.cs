@@ -4,5 +4,7 @@
     {
         public Task<IEnumerable<Order>> GetAllOrders();
 
+        public Task<IEnumerable<OrderStatus>> GetStatusOrders();
+
     }
 }
