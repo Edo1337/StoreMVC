@@ -267,3 +267,13 @@ body {
     border-radius: 10px; /* Закругление углов */
     overflow: hidden; /* Обрезаем углы */
 }
+
+th {
+    background-color: #d4a59a;
+    align-items: center;
+}
+
+td {
+    background-color: #f3e0dc;
+    align-items: center;
+}
