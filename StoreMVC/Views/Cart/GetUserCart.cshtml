@@ -37,11 +37,11 @@
                             <img style="width:100px;height:120px" src="~/Uploads/Product/@item.Product.Image" class="card-img-top">
                         }
                     </td>
-                    <td>@item.Product.Category.CategoryName</td>
+                    <td>@item.Product.Category?.CategoryName</td>
                     <td>@item.Product.Price</td>
                     <td>@item.Quantity</td>
                     <td>
-                        <a class="btn btn-danger" href="/Cart/AddProduct?productId=@item.ProductId&&redirect=1">+</a>
+                        <a class="btn btn-success" href="/Cart/AddProduct?productId=@item.ProductId&&redirect=1">+</a>
                         <a class="btn btn-danger" href="/Cart/RemoveProduct?productId=@item.ProductId">-</a>
                     </td>
                 </tr>
@@ -54,11 +54,10 @@
         </div>
 
         <div class="my-2">
-            <a class="btn btn-success" href="/Cart/Checkout">Оформить заказ</a>
+            <a class="btn btn-success text-white" href="/Cart/Checkout">Оформить заказ</a>
         </div>
-        
         <div class="my-2">
-            <a class="btn btn-danger" href="/Cart/ClearCart">Очистить корзину</a>
+            <a class="btn btn-danger text-white" href="/Cart/ClearCart">Очистить корзину</a>
         </div>
     }
     else

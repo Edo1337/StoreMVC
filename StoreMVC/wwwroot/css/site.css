@@ -5,8 +5,9 @@
 header {
     height: 60px 60px;
     margin: 0;
-    background: #d4a59a;
+    background-image: linear-gradient(-45deg, #ffcccc 0%, #FD746C 100%);
     border-radius: 0px 0px 10px 10px;
+    border-color: rgba(255, 255, 255, 0);
     overflow: hidden;
 }
 
@@ -56,7 +57,7 @@ li a {
 
 
 body {
-    background: #f3e0dc;
+    background-image: linear-gradient(to right, #fdfcfb 0%, #e2d1c3 100%);
     /*    overflow: hidden;
 */
 }
@@ -66,7 +67,7 @@ body {
 }*/
 
 .btn {
-    color: whitesmoke;
+    color: black;
     font-family: 'Oswald', sans-serif;
 }
 
@@ -113,6 +114,7 @@ body {
     overflow: visible;
     width: 290px;
     height: 400px;
+    background-color: rgba(255, 255, 255, 0);
 }
 
 .content {

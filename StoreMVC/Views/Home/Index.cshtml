@@ -27,7 +27,7 @@
                         </li>
                         <li class="nav-item col-12 m-2">
                             <label class="visually-hidden" for="sterm">Поиск по названию</label>
-                            <button type="submit" class="btn btn-primary">Поиск</button>
+                            <button type="submit" class="btn btn-secondary">Поиск</button>
                         </li>
                     </ul>
                 </form>
@@ -39,7 +39,7 @@
     <div class="w-100 mt-4 d-flex flex-wrap justify-content-center">
         @foreach (var product in Model.Products)
         {
-            <div class="card text-center mx-4 mb-5 h-150 d-flex flex-column border-0" style="width: 16rem; background-color: #f3e0dc">
+            <div class="card text-center mx-4 mb-5 h-150 d-flex flex-column border-0" style="width: 16rem;">
                 <div class="content">
                     <div class="back">
                         <div class="back-content" style="background-color: white">
@@ -87,9 +87,9 @@
                                         @product.Price <br />
                                     }
                                     <br class="border-0" />
-                                    <a href="@Url.Action("Details", new { id = product.Id })" class="btn btn-primary">Продукт</a>
+                                    <a href="@Url.Action("Details", new { id = product.Id })" class="btn btn-info text-white">Продукт</a>
 
-                                    <button type="button" onclick="add(@product.Id)" class="btn btn-outline-dark bi bi-bag text-white"></button>
+                                    <button type="button" onclick="add(@product.Id)" class="btn btn-success bi bi-bag text-white"></button>
                                 </div>
                             </div>
                         </div>
